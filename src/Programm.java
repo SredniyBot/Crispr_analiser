@@ -16,11 +16,11 @@ public class Programm {
         JPanel p = new JPanel();
         JLabel l = new JLabel("Enter your CRISPR_IDs");
         JTextArea area = new JTextArea(5,30);
-        JButton b = new JButton("Enter");
+        JButton b1= new JButton("Enter");
+        JButton b2 = new JButton("?");
         JScrollPane scroll = new JScrollPane(area,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         p.setLayout(new FlowLayout());
-        b.addActionListener(new ActionListener() {
-
+        b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FindProtein.input(area.getText());
@@ -32,14 +32,10 @@ public class Programm {
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         p.add(l);
         p.add(scroll);
-        p.add(b);
+        p.add(b1);
+        p.add(b2);
         w.add(p);
         w.setResizable(false);
         w.setVisible(true);
     }
-
-
-
-
-
 }

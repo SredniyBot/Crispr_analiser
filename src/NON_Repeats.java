@@ -6,23 +6,23 @@ import java.util.Map;
 import java.util.Set;
 
 public class NON_Repeats {
-	 private static ArrayList<String[]> spasers = new ArrayList<String[]>();
-	 private static double procent_of_hits=40;
+	 private static ArrayList<String[]> spacers = new ArrayList<String[]>();
+	 private static double percent_of_hits =40;
 	 public static Set<String> bacteriophages= new HashSet<>();
 	 private static String output="";
 	 static {
 		 String key;
 		  output="Spacers:\n";
-		 for(int number_of_spacer =0;number_of_spacer<Find_Repeats.spasers.size();number_of_spacer++) {
-			 key=Find_Repeats.spasers.get(number_of_spacer);
-			 String[] s = {key,swap(key),complimentar(key),swap(complimentar(key))};
-			 spasers.add(s);
+		 for(int number_of_spacer = 0; number_of_spacer<Find_Repeats.spacers.size(); number_of_spacer++) {
+			 key=Find_Repeats.spacers.get(number_of_spacer);
+			 String[] s = {key,swap(key), complimentary(key),swap(complimentary(key))};
+			 spacers.add(s);
 			 output+=s[0]+"\n";
 		 }	 
 		 
-		 for(int number_of_spacer=0;number_of_spacer<spasers.size();number_of_spacer++) {
+		 for(int number_of_spacer = 0; number_of_spacer< spacers.size(); number_of_spacer++) {
 				 for(int one_of_four_variants = 0;one_of_four_variants<4;one_of_four_variants++) {
-					 System.out.println(spasers.get(number_of_spacer)[one_of_four_variants]);
+					 System.out.println(spacers.get(number_of_spacer)[one_of_four_variants]);
 				 }
 				 System.out.println();
 				 System.out.println();
@@ -32,18 +32,18 @@ public class NON_Repeats {
 		        writer.flush();
 		    } catch(IOException ex){
 		        System.out.println(ex.getMessage());
-		        Panel.ERROR_LIST.add("spacer.txt is not alloweded");
+		        Panel.ERROR_LIST.add("spacer.txt is not allowed");
 		    }
 		 
 		
 	 }
 	 
 	/*
-	 * получение результатов бласта и начало парсинга
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
 	 public static void start() {
 		 if(!Program.wide_search) {
-			 for(String[] d:spasers) {
+			 for(String[] d: spacers) {
 				 try {
 					 Map<String,String> Genome=BlastApi.request(d[0]);
 					 if(!Genome.isEmpty()) {
@@ -56,7 +56,7 @@ public class NON_Repeats {
 						    }
 						    catch(IOException ex){
 						        System.out.println(ex.getMessage());
-						        Panel.ERROR_LIST.add("spacer.txt is not alloweded");
+						        Panel.ERROR_LIST.add("spacer.txt is not allowed");
 						    }
 						 Panel.STATUS="Alignment of spacer and genome";
 						 search(Genome.get(k),d);
@@ -79,19 +79,11 @@ public class NON_Repeats {
 		 }
 		 Panel.STATUS="Done";
 	 }
-	 
-	 
-	 
-	 
-	 
-	 
 
-	 
-	 
 	/*
-	 * поиск спейсеров по геномам. заносит предполагаемые памы в лист и текстоывый документ
-	 * @param genome геном по которому надо искать 
-	 * @param spacer массив инстанций 1 спейсера
+	 * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param genome пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 
+	 * @param spacer пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public static void search(String genome,String [] spacer) {
 		int length_of_string=spacer[0].length()/2-2;
@@ -118,7 +110,7 @@ public class NON_Repeats {
 						hit++;
 					}
 				}
-				if(hit/(arr.size()-1)*100>=procent_of_hits) {
+				if(hit/(arr.size()-1)*100>= percent_of_hits) {
 					if(variant_of_spacer==0) {
 						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+"/"+swap(genome.substring(s-10,s))+" }";
 						pams.add(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10));
@@ -137,24 +129,24 @@ public class NON_Repeats {
 						System.out.println(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" swapped");
 						
 					}else if(variant_of_spacer==2) {
-						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+complimentar(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+"/"+complimentar(genome.substring(s-10,s))+" }";
-						pams.add(complimentar(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)));
-						System.out.println(complimentar(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" comp"));
+						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+ complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+"/"+ complimentary(genome.substring(s-10,s))+" }";
+						pams.add(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)));
+						System.out.println(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" comp"));
 						
 						
-						pams1.add(swap(complimentar(genome.substring(s-10,s))));
-						System.out.println(swap(complimentar(genome.substring(s-10,s)+" comp")));
+						pams1.add(swap(complimentary(genome.substring(s-10,s))));
+						System.out.println(swap(complimentary(genome.substring(s-10,s)+" comp")));
 						
 						
 					}else if(variant_of_spacer==3) {
-						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+complimentar(swap(genome.substring(s-10,s)))+"/"+complimentar(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+" }";
-						pams.add(complimentar(swap(genome.substring(s-10,s))));
-						System.out.println(complimentar(swap(genome.substring(s-10,s)))+" comp swapped");
+						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+ complimentary(swap(genome.substring(s-10,s)))+"/"+ complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+" }";
+						pams.add(complimentary(swap(genome.substring(s-10,s))));
+						System.out.println(complimentary(swap(genome.substring(s-10,s)))+" comp swapped");
 						
 						
 						
-						pams1.add(complimentar(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)));
-						System.out.println(complimentar(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+" comp swapped");
+						pams1.add(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)));
+						System.out.println(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+" comp swapped");
 					}
 				}
 				hit=0;
@@ -164,17 +156,10 @@ public class NON_Repeats {
 		}
 		output+="\n";
 	}
-	 
-	
-	
-	
-	
-	
-	
-	 
+
 	/*
-	 * возвращающий строку задом на перед
-	 * @param input строка для переворачивания
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 * @param input пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
 	 public static String swap(String input) {
 	        String res = "";
@@ -185,10 +170,10 @@ public class NON_Repeats {
 	    }
 	 
 	/*
-	 * возвращающий строку компрлиментарную данной
-	 * @param input строка для комплиментации
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param input пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
-	 public static String complimentar(String input) {//метод 
+	 public static String complimentary(String input) {//пїЅпїЅпїЅпїЅпїЅ
 		 char[]s=input.toCharArray();
 		 for(int i = 0;i<input.length();i++) {
 			 if(s[i]=='A') {

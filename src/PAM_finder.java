@@ -10,8 +10,8 @@ public class PAM_finder {
 	public static int procent=55;
 
 
-	/*добавляет памы в список
-	 * @param Strings_with_pams массив Set с0 строками из 10 нуклеотидов в которых предположительно находится пам
+	/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param Strings_with_pams пїЅпїЅпїЅпїЅпїЅпїЅ Set пїЅ0 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 10 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 	*/
 	public static void add_pams(Set<String> Strings_with_pams) {
 		for(String s:Strings_with_pams) {
@@ -24,7 +24,7 @@ public class PAM_finder {
 		}
 	}
 	
-	/*анализирует все памы
+	/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	*/
 	public static void try_to_find() {
 			int pam_size=9;
@@ -103,13 +103,7 @@ public class PAM_finder {
 //	if(Programm.download_resalts) {
 //		WebLogo.download();
 //	}
-		
-		
-		
-		
-		
-		
-		
+
 	}
 	
 	

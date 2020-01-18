@@ -17,7 +17,7 @@ public static int shift;
 public static boolean shift_needed=false;
 public static String STATUS="Trying to find repeats and spacers";
 public static ArrayList<String> ERROR_LIST = new ArrayList<String>();
-	public void paint(Graphics g) {//метод отрисовки панели
+	public void paint(Graphics g) {//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		Color bgcolor = new Color(200,230,250);
 		g.setColor(bgcolor);
 		g.fillRect(0,0,1000,1000);
@@ -30,7 +30,7 @@ public static ArrayList<String> ERROR_LIST = new ArrayList<String>();
 		if(REZIM==0) {
 			g.drawString("Trying to find repeats and spacers",45,15);
 		} else if(REZIM==10) {
-			paint_repeats_and_spacers(Find_Repeats.zapolnenie_massiva(), g);
+			paint_repeats_and_spacers(Find_Repeats.fillArray(), g);
 		}else if(REZIM==2) {
 			g.drawString("Done",45,15);
 		}
@@ -41,8 +41,8 @@ public static ArrayList<String> ERROR_LIST = new ArrayList<String>();
 	
 	
 	/*
-	 * отображение повторов и спейсеров
-	 * @param casset лист с повторами-спейсерами в правильном порядке
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param casset пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public static void paint_repeats_and_spacers(ArrayList<String> casset,Graphics g) {
 		for(int i =0;i<casset.size();i++) {
@@ -74,14 +74,9 @@ public static ArrayList<String> ERROR_LIST = new ArrayList<String>();
 			}
 			
 		}
-		
-		
-		
-		
+
 	}
 
-
-	
 	public static void ERROR_LIST_prtint(Graphics g) {
 	if(!ERROR_LIST.isEmpty()) {
 			for(int i =0;i<ERROR_LIST.size();i++) {
@@ -97,8 +92,6 @@ public static ArrayList<String> ERROR_LIST = new ArrayList<String>();
 			}
 	}
 	}
-	
-	
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {

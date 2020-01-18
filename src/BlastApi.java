@@ -13,8 +13,8 @@ public class BlastApi {
     public static ArrayList<String> number_of_genome=new ArrayList<String>();
 
 	/*
-	 * возвращает словарь название организма-его геном
-	 * @param query спейсер который нао пробластить
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 * @param query пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
 	public static Map<String,String> request(String query) throws InterruptedException {
     	Map<String,String> Genome=new HashMap<String,String>();
@@ -101,9 +101,9 @@ FORMAT_TYPE: JSON2
 	
 	
 	/*
-	 * возвращает полученную информацию по ссылке
-	 * @param link ссылка для получения информации
-	 * @param method метод запроса
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param link пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param method пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
 	public static String output(String link,String method) throws IOException {
 		  String s=null;
@@ -132,8 +132,8 @@ FORMAT_TYPE: JSON2
 	
 	
 	
-	/*получает информацию по бласту 
-	 * @param query спейсер, который надо пробластить
+	/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 
+	 * @param query пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
 	public static String firsth_output(String query) throws IOException {
 		ByteArrayOutputStream result = null;
@@ -174,11 +174,5 @@ FORMAT_TYPE: JSON2
 		}
 		return result.toString("UTF-8");
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

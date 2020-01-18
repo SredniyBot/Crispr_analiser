@@ -61,7 +61,6 @@ class FindProtein {
     public static String output(String link) throws IOException {
         String s=null;
         URL url = new URL(link);
-
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setDoOutput(true);

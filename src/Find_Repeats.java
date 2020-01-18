@@ -2,81 +2,69 @@ import java.util.*;
 
 public class Find_Repeats {
     private static ArrayList<String> gen = new ArrayList<String>();
-    public static ArrayList<String> spasers = new ArrayList<String>();
+    public static ArrayList<String> spacers = new ArrayList<String>();
     public static ArrayList<String> repeats_in_a_row = new ArrayList<String>();
     private static Map<String, Set<Integer>> repeats = new HashMap<String, Set<Integer>>();
-    private static String intermedia_gen;
-    private static String intermedia_gen1;
-    private static double hit;
-    private static double hit1;
+    private static String intermedia_gen,intermedia_gen1;
+    private static double hit,hit1;
 
-    private static double procent_of_hits =80;
-    private static double procent_of_hits2 =70;
+    private static double percent_of_hits =80;
+    private static double percent_of_hits2 =70;
     private static String input;
 
 	/*
-	 *начало поиска повторов
-	 *@param input геном кассеты
+	 *пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 *@param input пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
-	public static void start(String input) {//
- 
-        input=proverka_na_durachka(input);
+	public static void start(String input) {
+        input= checkData(input);
         Find_Repeats.input=input;
-        if(input.equals("false")!=true) {
         	for (char c : input.toCharArray()) {
             gen.add(String.valueOf(c));
        }
        try_to_find();
 
-       split_to_spasers();
+       split_to_spacers();
        Panel.REZIM=10;
        NON_Repeats.start();
-      // NON_Repeats.parse_viruses();
-
-        }else {
-        	Panel.STATUS="Wrong input Data";
-        	System.out.println("ERROR");
-        }
     }
 
-	
-	
-	/*поиск повторов
+	/*пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
 	private static void try_to_find() {
-	       		for(int count_of_nucleotids = 55;count_of_nucleotids>22;count_of_nucleotids--) {
+	       		for(int count_of_nucleotides = 55;count_of_nucleotides>22;count_of_nucleotides--) {
 		        			intermedia_gen1="";
 		                	intermedia_gen="";
-		                	hit=sravnenie(count_of_nucleotids,0,count_of_nucleotids+21,gen);
-		                	for(int i = 0;i<=count_of_nucleotids;i++) {
+		                	hit= compare(count_of_nucleotides,0,count_of_nucleotides+21,gen);
+		                	for(int i = 0;i<=count_of_nucleotides;i++) {
 		        				intermedia_gen =intermedia_gen+gen.get(i);
 		        			}
-		                	hit1=sravnenie1(count_of_nucleotids,gen.size()-1,gen.size()-1-count_of_nucleotids+21,gen);
-		            		for(int i = 0;i<=count_of_nucleotids;i++) {
+		                	hit1= compare1(count_of_nucleotides,gen.size()-1,gen.size()-1-count_of_nucleotides+21,gen);
+		            		for(int i = 0;i<=count_of_nucleotides;i++) {
 		        				intermedia_gen1 =intermedia_gen1+gen.get(gen.size()-1-i);
 		        			}
-		            		
-			                for(int second_compare=count_of_nucleotids+21;second_compare<=count_of_nucleotids+55;second_compare++) {
-			                	for(int first_compare=0;first_compare<gen.size()-count_of_nucleotids-second_compare;first_compare++) {
-			                		if(hit<sravnenie(count_of_nucleotids,first_compare,second_compare+first_compare,gen)) {
-			                			hit=sravnenie(count_of_nucleotids,first_compare,second_compare+first_compare,gen);
+
+			                for(int second_compare=count_of_nucleotides+21;second_compare<=count_of_nucleotides+55;second_compare++) {
+			                	for(int first_compare=0;first_compare<gen.size()-count_of_nucleotides-second_compare;first_compare++) {
+			                		if(hit< compare(count_of_nucleotides,first_compare,second_compare+first_compare,gen)) {
+			                			hit= compare(count_of_nucleotides,first_compare,second_compare+first_compare,gen);
 			                			intermedia_gen="";
-			                			for(int i = 0;i<=count_of_nucleotids;i++) {
+			                			for(int i = 0;i<=count_of_nucleotides;i++) {
 			                				intermedia_gen =intermedia_gen+gen.get(first_compare+i);
 			                			}
 			                		}
-			                		
-			                		if(hit1<=sravnenie1(count_of_nucleotids,gen.size()-1-first_compare,gen.size()-1-(second_compare+first_compare),gen)) {
-			                			hit1=sravnenie1(count_of_nucleotids,gen.size()-1-first_compare,gen.size()-1-second_compare-first_compare,gen);
+
+			                		if(hit1<= compare1(count_of_nucleotides,gen.size()-1-first_compare,gen.size()-1-(second_compare+first_compare),gen)) {
+			                			hit1= compare1(count_of_nucleotides,gen.size()-1-first_compare,gen.size()-1-second_compare-first_compare,gen);
 			                			intermedia_gen1="";
-			                			for(int i = 0;i<=count_of_nucleotids;i++) {
+			                			for(int i = 0;i<=count_of_nucleotides;i++) {
 			                				intermedia_gen1 =gen.get(gen.size()-1-(first_compare+i))+intermedia_gen1;
 			                			}
 			                		}
 			                	}
 			                }
-			                if(hit/count_of_nucleotids*100>=procent_of_hits) {
-				                	intermedia_gen=contein(intermedia_gen,intermedia_gen1);
+			                if(hit/count_of_nucleotides*100>= percent_of_hits) {
+				                	intermedia_gen= contain(intermedia_gen,intermedia_gen1);
 				                	hit=0;
 				                    Set<Integer> set = new HashSet<Integer>();
 					                for(int compare =0;compare<gen.size()-intermedia_gen.length()+1;compare++) {
@@ -84,9 +72,9 @@ public class Find_Repeats {
 				                    		if(gen.get(compare+number_of_nucleotid).equals(String.valueOf(intermedia_gen.charAt(number_of_nucleotid)))) {
 				                    			hit+=1;
 				                        	}
-				                        
-				                    	}	
-				                    	if(hit/count_of_nucleotids*100>=procent_of_hits2) {
+
+				                    	}
+				                    	if(hit/count_of_nucleotides*100>= percent_of_hits2) {
 				                    		set.add(compare);
 				                    	}
 				                    	hit=0;
@@ -97,12 +85,12 @@ public class Find_Repeats {
 		            intermedia_gen="";
 		            intermedia_gen1="";
 	       		}
-	       		
+
         intermedia_gen1="";
         intermedia_gen="";
         String res = "";
         hit=0;
-        
+
         Set<Integer> value = new HashSet<Integer>();
         for (String item : repeats.keySet()) {
             Set<Integer> v2 = repeats.get(item);
@@ -117,7 +105,7 @@ public class Find_Repeats {
           }
         }
         res=check_symbols_from_ends(res,value,70);
-        
+
         System.out.println(res);
         System.out.println();
         repeats.clear();
@@ -129,7 +117,7 @@ public class Find_Repeats {
         			hit+=1;
             	}
         	}
-        	if(hit/res.length()*100>=procent_of_hits2) {
+        	if(hit/res.length()*100>= percent_of_hits2) {
         		set.add(compare);
         	}
         	hit=0;
@@ -148,22 +136,22 @@ public class Find_Repeats {
 		//System.out.println(repeats_in_a_row.size());
     }
 
-	/*метод, заполняющий лист повторов и спейсеров в правильном порядке для отображения в панели
+	/*пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
-	public static ArrayList<String> zapolnenie_massiva() {
+	public static ArrayList<String> fillArray() {
 		ArrayList<String> st=new ArrayList<String>();
 		st.add(repeats_in_a_row.get(0));
 		for(int i=0;i<repeats_in_a_row.size()-1;i++) {
-			st.add(spasers.get(i));
+			st.add(spacers.get(i));
 			st.add(repeats_in_a_row.get(i+1));
 		}//System.out.println(st.size());
 		return st;
 	}
     
-	/*проверка на правильность входных данных
-	 *@param input криспр кассета
+	/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 *@param input пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
-    private static String proverka_na_durachka(String input) {
+    private static String checkData(String input) {
     	input=input.replace("\n","");
     	input=input.replace('a','A');
     	input=input.replace('t','T');
@@ -176,15 +164,24 @@ public class Find_Repeats {
     	}
     	return input;
     }
-    
+
+    public static boolean rightData(String Data){
+    	if(Data.length()>=80&&Data.contains("a")||Data.contains("A")||Data.contains("g")||Data.contains("G")
+				||Data.contains("c")||Data.contains("C")||Data.contains("t")||Data.contains("T")){
+    		if(!checkData(Data).equals("false")){
+				return true;
+			}
+		}
+    	return false;
+	}
 	/*
-	 * поиск совпадений двух цепочек слева на право. возвращает количество попаданий
-	 * @param count_of_nucleotids длинна цепочек 
-	 * @param first_compare номер 1 символа 1 цепочки
-	 * @param second_compare номер 1 символа 2 цепочки
-	 * @param genbank строка по которой надо искать, представленная ввиде листа
+	 * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param count_of_nucleotids пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param first_compare пїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param second_compare пїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param genbank пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	*/
-    private static int sravnenie(int count_of_nucleotids,int first_compare, int second_compare,ArrayList<String> genbank) {//
+    private static int compare(int count_of_nucleotids, int first_compare, int second_compare, ArrayList<String> genbank) {//
     	int schetchik = 0;
 	    	for(int number_of_nucleotid=0;number_of_nucleotid<count_of_nucleotids;number_of_nucleotid++) {
 	            if(genbank.get(first_compare+number_of_nucleotid).equals(genbank.get(second_compare+number_of_nucleotid))) {
@@ -196,13 +193,13 @@ public class Find_Repeats {
     
     
     /*
-	 * поиск совпадений двух цепочек справа на лево. возвращает количество попаданий
-	 * @param count_of_nucleotids длинна цепочек 
-	 * @param first_compare номер 1 символа 1 цепочки
-	 * @param second_compare номер 1 символа 2 цепочки
-	 * @param genbank строка по которой надо искать, представленная ввиде листа
+	 * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param count_of_nucleotids пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+	 * @param first_compare пїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param second_compare пїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param genbank пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	*/
-    private static int sravnenie1(int count_of_nucleotids,int first_compare, int second_compare,ArrayList<String> genbank) {
+    private static int compare1(int count_of_nucleotids, int first_compare, int second_compare, ArrayList<String> genbank) {
     	int schetchik = 0;
 	    	for(int number_of_nucleotid=0;number_of_nucleotid<count_of_nucleotids;number_of_nucleotid++) {
 	            if(genbank.get(first_compare-number_of_nucleotid).equals(genbank.get(second_compare-number_of_nucleotid))) {
@@ -213,20 +210,20 @@ public class Find_Repeats {
     	}
     
     
-	/*вычленение спейсеров
+	/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
-    private static void split_to_spasers() {
+    private static void split_to_spacers() {
     	for(int i =1;i<input.split(" ").length;i++) {
-    		spasers.add(input.split(" ")[i]);
+    		spacers.add(input.split(" ")[i]);
     	}
     }
     
 	/*
-	*возвращает максимально большой совпавший кусок двух строк
-	*@param s первая строка для сравнения
-	*@param m вторая строка для сравнения
+	*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	*@param s пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	*@param m пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
-    private static String contein(String s,String m) {
+    private static String contain(String s, String m) {
     	ArrayList<String> f=new ArrayList<String>();
 	    	for(int h=0;h<s.length();h++) {
 	    		for(int r=m.length();r>h;r--) {
@@ -247,10 +244,10 @@ public class Find_Repeats {
     
     
 	/*
-	 * проверка на правильность символов с концов. Возвращает строку с правильными символами с концов
-	 * @param st строка которую нужно проверить
-	 * @param set строки, похожие на st, по которым надо проверять
-	 * @param procent процент попаданий, допустимый в строке
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param st пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param set пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ st, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param procent пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
     private static String check_symbols_from_ends(String st, Set<Integer> set,double procent) {//
     	
@@ -284,11 +281,11 @@ public class Find_Repeats {
     
     
     /*
-	 * проверка на правильность символа. Возвращает строку с правильным символом 
-	 * @param st строка которую нужно проверить
-	 * @param set строки, похожие на st, по которым надо проверять
-	 * @param procent процент попаданий, допустимый в строке
-	 * @param number номер проверяемого символа
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+	 * @param st пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param set пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ st, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param procent пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param number пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
     private static boolean check_symbol(String st, Set<Integer> set,int number,double procent) {
     	double hit = 0;
@@ -302,6 +299,5 @@ public class Find_Repeats {
     	}
     	return false;
     }
-    
-    
+
 }

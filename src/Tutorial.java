@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 public class Tutorial {
-    private int Number=1,maxNumber=2;
+    private int Number=1,maxNumber=1;
     private String Path;
    Tutorial(String Path){
        this.Path=Path;
@@ -66,13 +66,15 @@ public class Tutorial {
 
     }
     public void getFiles(String Path){
-       if(new File(Path+1).exists()) {
-           while (new File(Path + (int)(Number+1)).exists()){
+       if(new File(Path+1+".png").exists()) {
+           System.out.println("djfvsjvjnvjsn");
+           while (new File(Path + (int)(Number+1)+".png").exists()){
                maxNumber++;
                Number++;
            }
+           Number=1;
        }else{
-           Path="src/";
+           this.Path="src/res/icons/";
        }
 
     }

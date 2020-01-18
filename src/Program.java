@@ -1,4 +1,3 @@
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -56,16 +55,20 @@ public class Program {
             public void actionPerformed(ActionEvent e) {
                 switch (Name) {
                     case btn1:
+                        if(Find_Repeats.rightData(area.getText())){
+                            window_with_panel(area.getText());
+                            w.setVisible(false);
+                        }else {
+                            JOptionPane.showMessageDialog(null,"Wrong input data.\nCheck tutorial.");
+                        }
 
-                        window_with_panel(area.getText());
-                        w.setVisible(false);
                         break;
                     case btn2:
                         Programm.main(null);
                         w.setVisible(false);
                         break;
                     case btn3:
-                        Tutorial t = new Tutorial("src/res/tutorial1/");
+                        Tutorial t = new Tutorial("src/res/tutorial2/");
                         t.showFrame();
                         break;
                 }
@@ -125,10 +128,7 @@ public class Program {
         w.setVisible(true);
 
     }
-
-
 }
-
 
 class SecThread extends Thread {
     @Override
