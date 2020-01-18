@@ -23,7 +23,7 @@ public class Program {
 
     private static void window() {
         JPanel p = new JPanel();
-        p.setLayout(new FlowLayout(FlowLayout.CENTER));
+        p.setLayout(new FlowLayout(FlowLayout.LEADING));
         Image img = null;
         try {
             img = ImageIO.read(new File("src/PAM_PIC.jpg"));
@@ -43,7 +43,7 @@ public class Program {
         w.add(p);
         w.setIconImage(img);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        w.setSize(560, 150);
+        w.setSize(560, 170);
         w.setResizable(false);
         w.setVisible(true);
     }
@@ -65,7 +65,8 @@ public class Program {
                         w.setVisible(false);
                         break;
                     case btn3:
-
+                        Tutorial t = new Tutorial("src/res/tutorial1/");
+                        t.showFrame();
                         break;
                 }
             }
