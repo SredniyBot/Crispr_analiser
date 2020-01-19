@@ -57,15 +57,15 @@ public class PAM_finder {
 			for(String i:pams) {
 				g.add(i.substring(0,pam_size+1));
 			}
-			
-		WebLogo.logo(g);
-		System.out.println("FGHJ");
+
+		//logo(g);
+
 		
 		
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			Panel.ERROR_LIST.add("THREAD_ERROR");
+			resultPanel.Error("THREAD_ERROR");
 			e.printStackTrace();
 		}
 		pam_size=9;
@@ -98,8 +98,8 @@ public class PAM_finder {
 		for(String i:pams1) {
 			h.add(i.substring(0,pam_size+1));
 		}
-		
-	WebLogo.logo1(h);
+		WebLogo.logos(h,g);
+		//WebLogo.logo1(h);
 //	if(Programm.download_resalts) {
 //		WebLogo.download();
 //	}

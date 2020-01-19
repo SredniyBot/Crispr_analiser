@@ -24,7 +24,7 @@ DATABASE: unclassified bacteriophages (taxid:12333), bacteriophages (taxid:38018
 PROGRAM: blastn
 FORMAT_TYPE: JSON2
         * */
-		 Panel.STATUS="BLASTing spacers";
+		 resultPanel.Status("BLASTing spacers");
         try {
         	boolean avaliable = false;
             String s=firsth_output(query);
@@ -71,7 +71,7 @@ FORMAT_TYPE: JSON2
             if(avaliable) {
             	s=output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID="+RID,"GET");
             	//System.out.println(s);
-            Panel.STATUS="Downloading viral genome";
+            resultPanel.Status("Downloading viral genome");
             s=s.substring(s.indexOf("ALIGNMENTS"));
            
             while(s.contains(">")) {
@@ -90,7 +90,7 @@ FORMAT_TYPE: JSON2
             }
             } catch (IOException e) {
             e.printStackTrace();
-            Panel.ERROR_LIST.add("BLAST_API_ERROR");
+            resultPanel.Error("BLAST_API_ERROR");
             return null;
         }
 		return Genome;
@@ -124,7 +124,7 @@ FORMAT_TYPE: JSON2
          }
           s=result.toString("UTF-8");
 		} catch (MalformedURLException e) {
-			Panel.ERROR_LIST.add("REQUEST_ERROR");
+			resultPanel.Error("REQUEST_ERROR");
 			e.printStackTrace();
 		}
 		return s;
@@ -157,7 +157,7 @@ FORMAT_TYPE: JSON2
         try {
             connection.getOutputStream().write(h.getBytes());
         } catch (IOException e) {
-        	Panel.STATUS="CONNECTION_ERROR";
+        	resultPanel.Status("CONNECTION_ERROR");
             e.printStackTrace();
         }
 
@@ -169,7 +169,7 @@ FORMAT_TYPE: JSON2
             result.write(buffer, 0, length);
         }
 		} catch (MalformedURLException e1) {
-			Panel.STATUS="CONNECTION_ERROR";
+			resultPanel.Status("CONNECTION_ERROR");
 			e1.printStackTrace();
 		}
 		return result.toString("UTF-8");

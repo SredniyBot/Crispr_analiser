@@ -1,13 +1,17 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class WebLogo {
 
-	/*Получение изобрадение веблого в корне проета
-	 * @param s лист с памами
+	/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param s пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	*/
-	public static void logo(ArrayList<String> s) {//получение веблого
+	private static void logo(ArrayList<String> s) {//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		try(FileWriter writer = new FileWriter("input.fa", false))
 	    {
 			String h = "";
@@ -19,7 +23,7 @@ public class WebLogo {
 	        writer.flush();
 	    }
 	    catch(IOException ex){
-	    	Panel.ERROR_LIST.add("input.fa ERROR");
+	    	resultPanel.Error("input.fa ERROR");
 	        System.out.println(ex.getMessage());
 	    }
 		
@@ -28,12 +32,10 @@ public class WebLogo {
 		Runtime.getRuntime().exec(cmdString); 
 		} catch (IOException e) { 
 		e.printStackTrace(); 
-		Panel.ERROR_LIST.add("Weblogo_create_ERROR");
+		resultPanel.Error("Weblogo_create_ERROR");
 		}
-			
-
 	}
-	public static void logo1(ArrayList<String> s) {//получение веблого
+	private static void logo1(ArrayList<String> s) {//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		try(FileWriter writer = new FileWriter("input1.fa", false))
 	    {
 			String h = "";
@@ -45,7 +47,7 @@ public class WebLogo {
 	        writer.flush();
 	    }
 	    catch(IOException ex){
-			Panel.ERROR_LIST.add("input.fa ERROR");
+			resultPanel.Error("input.fa ERROR");
 	        System.out.println(ex.getMessage());
 	    }
 		
@@ -53,11 +55,26 @@ public class WebLogo {
 		try { 
 		Runtime.getRuntime().exec(cmdString);
 		} catch (IOException e) { 
-		Panel.ERROR_LIST.add("Weblogo_create_ERROR");
+		resultPanel.Error("Weblogo_create_ERROR");
 		e.printStackTrace(); 
 		}
 			
 
+	}
+
+
+	public static void logos(ArrayList<String> left,ArrayList<String> right){
+		File leftLogo = new File("left_pam.png");
+		File rightLogo = new File("right_pam.png");
+		if(leftLogo.exists()){
+			leftLogo.delete();
+		}
+		if(rightLogo.exists()){
+			rightLogo.delete();
+		}
+		logo1(left);
+		logo(right);
+		show_weblogo();
 	}
 
 //public static void download() {
@@ -79,8 +96,17 @@ public class WebLogo {
 //	
 //}
 
-	public static void show_web_logo () {
-		
+	private static void show_weblogo () {
+		BufferedImage imgleft=null;
+		BufferedImage imgright=null;
+		try {
+			 imgleft = ImageIO.read(new File("left_pam.png"));
+			 imgright = ImageIO.read(new File("right_pam.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		resultPanel.leftPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgleft,340,300)));
+		resultPanel.rightPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgright,340,300)));
 	}
 	
 			

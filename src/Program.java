@@ -28,9 +28,9 @@ public class Program {
             img = ImageIO.read(new File("src/PAM_PIC.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
-            Panel.ERROR_LIST.add("IMAGE_ERROR");
+            resultPanel.Error("IMAGE_ERROR");
         }
-        area = new JTextArea(4, 40);
+        area = new JTextArea(5, 40);
         JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         p.add(scroll);
         p.add(createButton(605, 0, 80, 80, btn1));
@@ -42,7 +42,7 @@ public class Program {
         w.add(p);
         w.setIconImage(img);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        w.setSize(560, 170);
+        w.setSize(560, 190);
         w.setResizable(false);
         w.setVisible(true);
     }
@@ -68,7 +68,7 @@ public class Program {
                         w.setVisible(false);
                         break;
                     case btn3:
-                        Tutorial t = new Tutorial("src/res/tutorial2/");
+                        Tutorial t = new Tutorial("src/res/tutorial1/");
                         t.showFrame();
                         break;
                 }
@@ -105,28 +105,38 @@ public class Program {
     }
 
 
-    private static void window_with_panel(String s) {// ���� � ������������ ����������
+    private static void window_with_panel(String s) {// ���� � ������������ ����������String s
         GENOME = s;
         SecondThread = new SecThread();
         SecondThread.start();
-        //Panel.REZIM=1;
         JFrame w = new JFrame("RESULT");
+        JTextArea area1 = new JTextArea("Trying to find repeats and spacers",15, 60);
+        resultPanel p = new resultPanel(area1);
+        JLabel left=resultPanel.leftPam;
+        JLabel right=resultPanel.rightPam;
+        JLabel status=resultPanel.Status;
+        area1.setDisabledTextColor(Color.BLACK);
+        JScrollPane scroll = new JScrollPane(area1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         Image img = null;
         try {
             img = ImageIO.read(new File("src/PAM_PIC.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
-            Panel.ERROR_LIST.add("IMAGE_ERROR");
+            resultPanel.Error("IMAGE_ERROR");
         }
+        area1.setEnabled(false);
+        scroll.setEnabled(false);
+        p.setBackground(new Color(200,240,240));
+        p.add(scroll);
+        p.add(left);
+        p.add(right);
+        p.add(status);
         w.setIconImage(img);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         w.setSize(700, 700);
         w.setResizable(false);
-        Panel p = new Panel();
-        w.addMouseWheelListener(p);
         w.add(p);
         w.setVisible(true);
-
     }
 }
 

@@ -67,7 +67,6 @@ public class Tutorial {
     }
     public void getFiles(String Path){
        if(new File(Path+1+".png").exists()) {
-           System.out.println("djfvsjvjnvjsn");
            while (new File(Path + (int)(Number+1)+".png").exists()){
                maxNumber++;
                Number++;

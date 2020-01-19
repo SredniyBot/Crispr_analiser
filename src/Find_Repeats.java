@@ -23,9 +23,8 @@ public class Find_Repeats {
             gen.add(String.valueOf(c));
        }
        try_to_find();
-
        split_to_spacers();
-       Panel.REZIM=10;
+       resultPanel.paint_repeats_and_spacers(fillArray());
        NON_Repeats.start();
     }
 

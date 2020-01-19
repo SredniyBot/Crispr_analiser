@@ -32,7 +32,7 @@ public class NON_Repeats {
 		        writer.flush();
 		    } catch(IOException ex){
 		        System.out.println(ex.getMessage());
-		        Panel.ERROR_LIST.add("spacer.txt is not allowed");
+		        resultPanel.Error("spacer.txt is not allowed");
 		    }
 		 
 		
@@ -56,9 +56,9 @@ public class NON_Repeats {
 						    }
 						    catch(IOException ex){
 						        System.out.println(ex.getMessage());
-						        Panel.ERROR_LIST.add("spacer.txt is not allowed");
+						        resultPanel.Error("spacer.txt is not allowed");
 						    }
-						 Panel.STATUS="Alignment of spacer and genome";
+						 resultPanel.Status("Alignment of spacer and genome");
 						 search(Genome.get(k),d);
 						 
 						 
@@ -67,7 +67,7 @@ public class NON_Repeats {
 					 System.out.println("Lost connection");
 				 }} catch (InterruptedException e) {
 					//System.out.println("Problem with blast");
-					Panel.ERROR_LIST.add("THREAD_ERROR");
+					resultPanel.Error("THREAD_ERROR");
 				}
 			 }
 			 PAM_finder.try_to_find();
@@ -77,7 +77,7 @@ public class NON_Repeats {
 			 
 			 
 		 }
-		 Panel.STATUS="Done";
+		 resultPanel.Status("Done");
 	 }
 
 	/*

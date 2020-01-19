@@ -27,6 +27,13 @@ public class Programm {
                 w.setVisible(false);
             }
         });
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tutorial t = new Tutorial("src/res/tutorial2/");
+                t.showFrame();
+            }
+        });
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         w.setBounds(100,100,width,height);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
