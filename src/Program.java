@@ -112,8 +112,6 @@ public class Program {
         JFrame w = new JFrame("RESULT");
         JTextArea area1 = new JTextArea("Trying to find repeats and spacers",15, 60);
         resultPanel p = new resultPanel(area1);
-        JLabel left=resultPanel.leftPam;
-        JLabel right=resultPanel.rightPam;
         JLabel status=resultPanel.Status;
         area1.setDisabledTextColor(Color.BLACK);
         JScrollPane scroll = new JScrollPane(area1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -128,8 +126,8 @@ public class Program {
         scroll.setEnabled(false);
         p.setBackground(new Color(200,240,240));
         p.add(scroll);
-        p.add(left);
-        p.add(right);
+        p.add(resultPanel.leftPam);
+        p.add(resultPanel.rightPam);
         p.add(status);
         w.setIconImage(img);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

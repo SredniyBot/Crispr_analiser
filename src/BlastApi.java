@@ -1,17 +1,18 @@
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BlastApi {
 
     public static ArrayList<String> number_of_genome=new ArrayList<String>();
-
+	private static boolean PreviousRidfound=false;
 	/*
 	 * ���������� ������� �������� ���������-��� �����
 	 * @param query ������� ������� ��� �����������
@@ -26,52 +27,68 @@ FORMAT_TYPE: JSON2
         * */
 		 resultPanel.Status("BLASTing spacers");
         try {
-        	boolean avaliable = false;
-            String s=firsth_output(query);
-            //System.out.println(s);
-            s=s.substring(s.lastIndexOf("QBlastInfoBegin")+16, s.lastIndexOf("QBlastInfoEnd")).replace("/n", "").replace(" ", "");
-            String RID=s.substring(4, s.lastIndexOf("RTOE")).replace("/n", "").replace(" ", "");
-            String RTOE=s.substring(s.lastIndexOf("RTOE")+5, s.length()-1).replace("/n", "").replace(" ", "");
-            
-            Thread.sleep(Integer.parseInt(RTOE)*1000);
-            s= output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID="+RID, "GET");
-            boolean g=true;
-            int attemp=0;
-            while(g) {
-            	attemp++;
-            	Thread.sleep(10000);
-            	s= output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID="+RID, "GET");
-            	if(s.contains("Status=WAITING")) {
-            		System.out.println("wait");
-            	} else if(s.contains("Status=FAILED")) {
-            		g=false;
-            		System.out.println("FAILED+6");
+			boolean avaliable = false;
+			String mbRID=checkForPreviousAttempts(query);
+			String RID;
+			String s;
+        	if(PreviousRidfound&&checkRID(mbRID)){
+				RID=mbRID;
+				avaliable = true;
+			}else {
 
-            	} else if(s.contains("Status=UNKNOWN")) {
-            		g=false;
-            		System.out.println("UNKNOWN");
-            	} else if(s.contains("Status=READY")) {
-            		//System.out.println(s);
-            		if(s.contains("ThereAreHits=yes")) {
-            			//System.out.println(s);
-            			g=false;
-            			avaliable=true;
-            		}else {
-            			//System.out.println(s);
-            			System.out.println("No results");
-            			avaliable=false;
-            			g=false;
-            		}
-            	}
-            	if(attemp>=50) {
-            		g=false;
-            		avaliable=false;
-            	}
-            }
+				s = firsth_output(query);
+				//System.out.println(s);
+				s = s.substring(s.lastIndexOf("QBlastInfoBegin") + 16, s.lastIndexOf("QBlastInfoEnd")).replace("/n", "").replace(" ", "");
+				RID = s.substring(4, s.lastIndexOf("RTOE")).replace("/n", "").replace(" ", "");
+				writeRid(query,mbRID,RID.replace("\n",""));
+				System.out.println(RID);
+				String RTOE = s.substring(s.lastIndexOf("RTOE") + 5, s.length() - 1).replace("/n", "").replace(" ", "");
+
+				Thread.sleep(Integer.parseInt(RTOE) * 1000);
+				s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID=" + RID, "GET");
+				boolean g = true;
+				int attemp = 0;
+				while (g) {
+					attemp++;
+					Thread.sleep(10000);
+					s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID=" + RID, "GET");
+					if (s.contains("Status=WAITING")) {
+						System.out.println("wait");
+					} else if (s.contains("Status=FAILED")) {
+						g = false;
+						System.out.println("FAILED+6");
+
+					} else if (s.contains("Status=UNKNOWN")) {
+						g = false;
+						System.out.println("UNKNOWN");
+					} else if (s.contains("Status=READY")) {
+						//System.out.println(s);
+						if (s.contains("ThereAreHits=yes")) {
+							//System.out.println(s);
+							g = false;
+							avaliable = true;
+						} else {
+							//System.out.println(s);
+							System.out.println("No results");
+							avaliable = false;
+							g = false;
+						}
+					}
+					if (attemp >= 50) {
+						g = false;
+						avaliable = false;
+					}
+				}
+			}
             if(avaliable) {
-            	s=output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID="+RID,"GET");
+            	Date date = new Date();
+            	removeRID(query);
+				writeRid(query,date.getYear()+","+ date.getMonth()+"."+date.getDay()+"-"+date.getHours(),RID.replace("\n",""));
+				System.out.println(RID);
+				s=output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID="+RID,"GET");
             	//System.out.println(s);
             resultPanel.Status("Downloading viral genome");
+            //System.out.println(s);
             s=s.substring(s.indexOf("ALIGNMENTS"));
            
             while(s.contains(">")) {
@@ -97,9 +114,101 @@ FORMAT_TYPE: JSON2
     }
 	
 	
-	
-	
-	
+	private static String checkForPreviousAttempts(String query){
+		String fileName = "src/res/Data/Rids";
+		String content = "";
+		Date date = new Date();
+		String s =date.getYear()+","+ date.getMonth()+"."+date.getDay()+"-"+date.getHours();
+		try {
+			content = Files.lines(Paths.get(fileName)).reduce("", String::concat);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(content.contains(query)){
+			content=content.substring(content.indexOf(query)-1);
+			if(subS(content,"[",",").equals(String.valueOf(date.getYear()))&&subS(content,",",".").equals(String.valueOf(date.getMonth()))&&
+					(subS(content,".","-").equals(String.valueOf(date.getDay()))||
+							(date.getYear()<Integer.valueOf(subS(content,"-","]")).intValue()&&Integer.valueOf(subS(content,".","-")).intValue()-date.getDay()<=1))){
+				PreviousRidfound=true;
+				return subS(content,"{","}");
+			}else{
+				removeRID(query);
+			}
+		}
+		PreviousRidfound=false;
+		return s;
+	}
+
+	private static boolean checkRID(String RID){
+		try {
+			return output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID="+RID,"GET").contains("ALIGNMENTS");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	private static void writeRid(String query,String date,String RID){
+		String fileName = "src/res/Data/Rids";
+		String content = null;
+		try {
+			content = Files.lines(Paths.get(fileName)).reduce("", String::concat);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+
+		try(FileWriter writer = new FileWriter("src/res/Data/Rids", false))
+		{
+			writer.write(content+"<"+query+">"+"["+date+"]"+"{"+RID+"}\n");
+			writer.append('\n');
+			writer.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void removeRID(String query){
+		String fileName = "src/res/Data/Rids";
+		String content = "";
+		try {
+			content = Files.lines(Paths.get(fileName)).reduce("", String::concat);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (content.contains(query)) {
+			String w = content.substring(content.indexOf(query)-1);
+			w=w.substring(0,w.indexOf("}")+1);
+			content=content.replace(w,"");
+		}
+
+
+		try(FileWriter writer = new FileWriter("src/res/Data/Rids", false))
+		{
+			writer.write(content);
+			writer.append('\n');
+			writer.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private static String subS(String st, String s1, String s2){
+		return st.substring(st.indexOf(s1)+1,st.indexOf(s2));
+	}
+
+
+
+
+
+
+
+
+
+
+
 	/*
 	 * ���������� ���������� ���������� �� ������
 	 * @param link ������ ��� ��������� ����������

@@ -26,12 +26,12 @@ public class WebLogo {
 	    	resultPanel.Error("input.fa ERROR");
 	        System.out.println(ex.getMessage());
 	    }
-		
-		String cmdString = "weblogo -f input.fa -F png -o right_logo.png -U probability -s large -A dna -t PAM";
-		try { 
-		Runtime.getRuntime().exec(cmdString); 
-		} catch (IOException e) { 
-		e.printStackTrace(); 
+		System.out.println("qwert");
+		String cmdString = "weblogo -f input.fa -F png -o src/res/logos/right_logo.png -U probability -s large -A dna -t PAM";
+		try {
+		Runtime.getRuntime().exec(cmdString);
+		} catch (IOException e) {
+		e.printStackTrace();
 		resultPanel.Error("Weblogo_create_ERROR");
 		}
 	}
@@ -50,22 +50,23 @@ public class WebLogo {
 			resultPanel.Error("input.fa ERROR");
 	        System.out.println(ex.getMessage());
 	    }
-		
-		String cmdString = "weblogo -f input1.fa -F png -o left_logo.png -U probability -s large -A dna -t PAM";
-		try { 
+		System.out.println("qwert");
+		String cmdString = "weblogo -f input1.fa -F png -o src/res/logos/left_logo.png -U probability -s large -A dna -t PAM";
+		try {
 		Runtime.getRuntime().exec(cmdString);
-		} catch (IOException e) { 
+		} catch (IOException e) {
 		resultPanel.Error("Weblogo_create_ERROR");
-		e.printStackTrace(); 
+		e.printStackTrace();
 		}
-			
+
 
 	}
 
 
 	public static void logos(ArrayList<String> left,ArrayList<String> right){
-		File leftLogo = new File("left_pam.png");
-		File rightLogo = new File("right_pam.png");
+		resultPanel.Status("creating WEBLOGO");
+		File leftLogo = new File("src/res/logos/left_logo.png");
+		File rightLogo = new File("src/res/logos/right_logo.png");
 		if(leftLogo.exists()){
 			leftLogo.delete();
 		}
@@ -86,23 +87,33 @@ public class WebLogo {
 //	String s=System.getProperty("user.dir").substring(0,System.getProperty("user.dir").lastIndexOf("\\"));
 //	File filePath = new File(s+Programm.name_of_directory);
 //    filePath.mkdir();
-//	
+//
 //	File f1 = new File(System.getProperty("user.dir")+"\\output.png");
 //	File f2 = new File(filePath+"output.png");
 //	f1.renameTo(f2);
 //	File f3 = new File(System.getProperty("user.dir")+"\\spacer.txt");
 //	File f4 = new File(filePath+"spacer.txt");
 //	f3.renameTo(f4);
-//	
+//
 //}
 
 	private static void show_weblogo () {
 		BufferedImage imgleft=null;
 		BufferedImage imgright=null;
 		try {
-			 imgleft = ImageIO.read(new File("left_pam.png"));
-			 imgright = ImageIO.read(new File("right_pam.png"));
-		} catch (IOException e) {
+				try {
+					while(!new File("src/res/logos/left_logo.png").exists()&&!new File("src/res/logos/right_logo.png").exists()){
+					Thread.sleep(500);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+
+			 imgleft = ImageIO.read(new File("src/res/logos/left_logo.png"));
+			 imgright = ImageIO.read(new File("src/res/logos/right_logo.png"));
+
+		} catch (IOException  e) {
 			e.printStackTrace();
 		}
 		resultPanel.leftPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgleft,340,300)));
