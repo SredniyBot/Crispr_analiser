@@ -12,10 +12,10 @@ import java.nio.file.Path;
 public class Tutorial {
     private int Number=1,maxNumber=1;
     private String Path;
-   Tutorial(String Path){
-       this.Path=Path;
-       getFiles(Path);
-   }
+    Tutorial(String Path){
+        this.Path=Path;
+        getFiles(Path);
+    }
 
     public void showFrame(){
         JFrame w = new JFrame("Tutorial");
@@ -27,17 +27,17 @@ public class Tutorial {
 
         p.setLayout(new FlowLayout(FlowLayout.CENTER));
         b1.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 if(Number==1){
-                     Number=maxNumber;
-                 }else{
-                     Number--;
-                 }
-                 tf.setText(Number+"/"+maxNumber);
-                 jl.setIcon(new ImageIcon(tutorialImage(2)));
-             }
-         });
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Number==1){
+                    Number=maxNumber;
+                }else{
+                    Number--;
+                }
+                tf.setText(Number+"/"+maxNumber);
+                jl.setIcon(new ImageIcon(tutorialImage(2)));
+            }
+        });
 
         b2.addActionListener(new ActionListener() {
             @Override
@@ -66,15 +66,15 @@ public class Tutorial {
 
     }
     public void getFiles(String Path){
-       if(new File(Path+1+".png").exists()) {
-           while (new File(Path + (int)(Number+1)+".png").exists()){
-               maxNumber++;
-               Number++;
-           }
-           Number=1;
-       }else{
-           this.Path="src/res/icons/";
-       }
+        if(new File(Path+1+".png").exists()) {
+            while (new File(Path + (int)(Number+1)+".png").exists()){
+                maxNumber++;
+                Number++;
+            }
+            Number=1;
+        }else{
+            this.Path="src/res/icons/";
+        }
 
     }
 

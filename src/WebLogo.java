@@ -10,53 +10,53 @@ public class WebLogo {
 
 	/*��������� ����������� ������� � ����� ������
 	 * @param s ���� � ������
-	*/
+	 */
 	private static void logo(ArrayList<String> s) {//��������� �������
 		try(FileWriter writer = new FileWriter("input.fa", false))
-	    {
+		{
 			String h = "";
 			for(int i=0;i<s.size();i++) {
-	    	h+=s.get(i)+"\n";
-	    }
-	        writer.write(h);
-	        System.out.println(h);
-	        writer.flush();
-	    }
-	    catch(IOException ex){
-	    	resultPanel.Error("input.fa ERROR");
-	        System.out.println(ex.getMessage());
-	    }
+				h+=s.get(i)+"\n";
+			}
+			writer.write(h);
+			System.out.println(h);
+			writer.flush();
+		}
+		catch(IOException ex){
+			resultPanel.Error("input.fa ERROR");
+			System.out.println(ex.getMessage());
+		}
 		System.out.println("qwert");
-		String cmdString = "weblogo -f input.fa -F png -o src/res/logos/right_logo.png -U probability -s large -A dna -t PAM";
+		String cmdString = "weblogo -f input.fa -F png -o src/res/logos/right_logo.png -U probability -s large -A dna -t RIGHT_PAM";
 		try {
-		Runtime.getRuntime().exec(cmdString);
+			Runtime.getRuntime().exec(cmdString);
 		} catch (IOException e) {
-		e.printStackTrace();
-		resultPanel.Error("Weblogo_create_ERROR");
+			e.printStackTrace();
+			resultPanel.Error("Weblogo_create_ERROR");
 		}
 	}
 	private static void logo1(ArrayList<String> s) {//��������� �������
 		try(FileWriter writer = new FileWriter("input1.fa", false))
-	    {
+		{
 			String h = "";
 			for(int i=0;i<s.size();i++) {
-	    	h+=s.get(i)+"\n";
-	    }
-	        writer.write(h);
-	        System.out.println(h);
-	        writer.flush();
-	    }
-	    catch(IOException ex){
+				h+=s.get(i)+"\n";
+			}
+			writer.write(h);
+			System.out.println(h);
+			writer.flush();
+		}
+		catch(IOException ex){
 			resultPanel.Error("input.fa ERROR");
-	        System.out.println(ex.getMessage());
-	    }
+			System.out.println(ex.getMessage());
+		}
 		System.out.println("qwert");
-		String cmdString = "weblogo -f input1.fa -F png -o src/res/logos/left_logo.png -U probability -s large -A dna -t PAM";
+		String cmdString = "weblogo -f input1.fa -F png -o src/res/logos/left_logo.png -U probability -s large -A dna -t LEFT_PAM";
 		try {
-		Runtime.getRuntime().exec(cmdString);
+			Runtime.getRuntime().exec(cmdString);
 		} catch (IOException e) {
-		resultPanel.Error("Weblogo_create_ERROR");
-		e.printStackTrace();
+			resultPanel.Error("Weblogo_create_ERROR");
+			e.printStackTrace();
 		}
 
 
@@ -78,40 +78,22 @@ public class WebLogo {
 		show_weblogo();
 	}
 
-//public static void download() {
-//	try {
-//		Thread.sleep(2000);
-//	} catch (InterruptedException e) {
-//		e.printStackTrace();
-//	}
-//	String s=System.getProperty("user.dir").substring(0,System.getProperty("user.dir").lastIndexOf("\\"));
-//	File filePath = new File(s+Programm.name_of_directory);
-//    filePath.mkdir();
-//
-//	File f1 = new File(System.getProperty("user.dir")+"\\output.png");
-//	File f2 = new File(filePath+"output.png");
-//	f1.renameTo(f2);
-//	File f3 = new File(System.getProperty("user.dir")+"\\spacer.txt");
-//	File f4 = new File(filePath+"spacer.txt");
-//	f3.renameTo(f4);
-//
-//}
 
 	private static void show_weblogo () {
 		BufferedImage imgleft=null;
 		BufferedImage imgright=null;
 		try {
-				try {
-					while(!new File("src/res/logos/left_logo.png").exists()&&!new File("src/res/logos/right_logo.png").exists()){
+			try {
+				while(!new File("src/res/logos/left_logo.png").exists()&&!new File("src/res/logos/right_logo.png").exists()){
 					Thread.sleep(500);
-					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
 				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
 
-			 imgleft = ImageIO.read(new File("src/res/logos/left_logo.png"));
-			 imgright = ImageIO.read(new File("src/res/logos/right_logo.png"));
+			imgleft = ImageIO.read(new File("src/res/logos/left_logo.png"));
+			imgright = ImageIO.read(new File("src/res/logos/right_logo.png"));
 
 		} catch (IOException  e) {
 			e.printStackTrace();
@@ -119,6 +101,6 @@ public class WebLogo {
 		resultPanel.leftPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgleft,340,300)));
 		resultPanel.rightPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgright,340,300)));
 	}
-	
-			
+
+
 }
