@@ -19,19 +19,14 @@ public class BlastApi {
 	 */
 	public static Map<String,String> request(String query) throws InterruptedException {
 		Map<String,String> Genome=new HashMap<String,String>();
-        /*
-        * QUERY: GGGTGGTTGGCTGACGCATCGCAATATTAA
-DATABASE: unclassified bacteriophages (taxid:12333), bacteriophages (taxid:38018) ; and exclude: bacteria (taxid:2)
-PROGRAM: blastn
-FORMAT_TYPE: JSON2
-        * */
 		resultPanel.Status("BLASTing spacers");
 		try {
-			boolean avaliable = false;
 			String mbRID=checkForPreviousAttempts(query);
-			String RID;
+			String RID = "";
 			String s=null;
-			if(PreviousRidfound&&checkRID(mbRID)){
+			if(Program.TEST){
+				s="";
+			}else if(PreviousRidfound&&checkRID(mbRID)){
 				RID=mbRID;
 				s="";
 			}else {
@@ -41,28 +36,36 @@ FORMAT_TYPE: JSON2
 				writeRid(query,mbRID,RID.replace("\n",""));
 				System.out.println(RID);
 				String RTOE = s.substring(s.lastIndexOf("RTOE") + 5, s.length() - 1).replace("/n", "").replace(" ", "");
-
 				Thread.sleep(Integer.parseInt(RTOE) * 1000);
 				s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID=" + RID, "GET");
 				tryToBlast(RID);
 			}
 			if(!s.equals(null)) {
-				Date date = new Date();
-				removeRID(query);
-				writeRid(query,date.getYear()+","+ date.getMonth()+"."+date.getDay()+"-"+date.getHours(),RID.replace("\n",""));
-				System.out.println(RID);
-				s=output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID="+RID,"GET");
-				//System.out.println(s);
-				resultPanel.Status("Downloading viral genome");
-				//System.out.println(s);
-				s=s.substring(s.indexOf("ALIGNMENTS"));
-
-				while(s.contains(">")) {
-					s=s.substring(s.indexOf(">")+1);
-					System.out.println((s.substring(0,s.indexOf("\n"))).substring(0,s.indexOf(" ")));
-
-					number_of_genome.add((s.substring(0,s.indexOf("\n"))).substring(0,s.indexOf(" ")));
+				if(!Program.TEST) {
+					Date date = new Date();
+					removeRID(query);
+					writeRid(query, date.getYear() + "," + date.getMonth() + "." + date.getDay() + "-" + date.getHours(), RID.replace("\n", ""));
+					System.out.println(RID);
+					s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID=" + RID, "GET");
+					resultPanel.Status("Downloading viral genome");
+					s = s.substring(s.indexOf("ALIGNMENTS"));
+					number_of_genome.clear();
+					System.out.println(query);
+					while(s.contains(">")) {
+						s=s.substring(s.indexOf(">")+1);
+						System.out.println((s.substring(0,s.indexOf("\n"))).substring(0,s.indexOf(" ")));
+						number_of_genome.add((s.substring(0,s.indexOf("\n"))).substring(0,s.indexOf(" ")));
+					}
+				}else{
+					resultPanel.Status("Downloading viral genome");
+					s=Test(query);
+					while(s.contains(">")) {
+						s = s.substring(s.indexOf(">") + 1);
+						System.out.println(s.substring(0, s.indexOf("<")));
+						number_of_genome.add(s.substring(0, s.indexOf("<")));
+					}
 				}
+
 
 				Genome.putAll(getFasta(number_of_genome));
 				return Genome;
@@ -73,6 +76,23 @@ FORMAT_TYPE: JSON2
 			return null;
 		}
 		return Genome;
+	}
+
+
+	private static String Test(String query){
+		String fileName = "src/res/Data/Test";
+		String content = null;
+		try {
+			content = Files.lines(Paths.get(fileName)).reduce("", String::concat);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (content.contains(query)) {
+			content=content.substring(content.indexOf(query));
+			content=subS(content,"{","}");
+		}
+		System.out.println(content);
+		return content;
 	}
 
 	private static String tryToBlast(String RID){
