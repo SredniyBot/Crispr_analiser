@@ -1,70 +1,42 @@
 Spacers:
-GGGTGGTTGGCTGACGCATCGCAATATTAA
-AGGAATATCCGCAATAATTAATTGCGCTCT
-TAAATTTGTTTAGCAGGTAAACCGTGCTTT
->MK448698.1 Streptococcus phage Javan187, complete genome {type of spacer:3 spacer:27592 TTAATATTGCGATGCGTCAGCCAACCACCC 27621 seq with PAM:CGGCATTTGT/GGTTAAAAAG }
->MK448949.1 Streptococcus phage Javan460, complete genome {type of spacer:3 spacer:34291 TTAATATTGCGATGCGTCAGCCAACCACCC 34320 seq with PAM:CGGCATTTGT/GGTTAAAAAG }
->MK448952.1 Streptococcus phage Javan472, complete genome {type of spacer:3 spacer:32766 TTAATATTGCGATGCGTCAGCCAACCACCC 32795 seq with PAM:CGGCATTTGT/GGTTAAAAAG }
->MK448778.1 Streptococcus phage Javan493, complete genome {type of spacer:3 spacer:33410 TTAATATTGCGATGCGTCAGCCAACCACCC 33439 seq with PAM:CGGCATTAGT/GGTTAAAAAG }
->MK448961.1 Streptococcus phage Javan494, complete genome {type of spacer:3 spacer:32292 TTAATATTGCGATGCGTCAGCCAACCACCC 32321 seq with PAM:CGGCATTAGT/GGTTAAAAAG }
->MK448959.1 Streptococcus phage Javan488, complete genome {type of spacer:3 spacer:33631 TTAATATTGCGATGCGTCAGCCAACCACCC 33660 seq with PAM:CAGCATTTGT/GGTTAAAAAG }
->MK448977.1 Streptococcus phage Javan530, complete genome {type of spacer:3 spacer:32114 TTAATATTGCGATGCGTCAGCCAACCACCC 32143 seq with PAM:CGGCATTTGT/GGTTAAAAAG }
->MK448975.1 Streptococcus phage Javan526, complete genome {type of spacer:3 spacer:34192 TTAATATTGCGATGCGTCAGCCAACCACCC 34221 seq with PAM:CGGCATTAGT/GGTTAAAAAG }
->MK448973.1 Streptococcus phage Javan522, complete genome {type of spacer:3 spacer:33770 TTAATATTGCGATGCGTCAGCCAACCACCC 33799 seq with PAM:CGGCATTAGT/GGTTAAAAAG }
->DQ864624.1 Streptococcus phage P9, complete genome {type of spacer:3 spacer:32292 TTAATATTGCGATGCGTCAGCCAACCACCC 32321 seq with PAM:CGGCATTTGT/GGTTAAAAAG }
->MK448957.1 Streptococcus phage Javan484, complete genome {type of spacer:3 spacer:37598 TTAATATTGCGATGCGTCAGCCAACCACCC 37627 seq with PAM:CGGCATTTGT/GGTTAAAAAG }
->MK448782.1 Streptococcus phage Javan501, complete genome {type of spacer:3 spacer:36550 TTAATATTGCGATGCGTCAGCCAACCACCC 36579 seq with PAM:CGGCATTAGT/GGTTAAAAAG }
->MK448762.1 Streptococcus phage Javan447, complete genome {type of spacer:3 spacer:32490 TTAATATTGCGATGCGTCAGCCAACCACCC 32519 seq with PAM:CGGCATTAGT/GGTTAAAAAG }
->MK448788.1 Streptococcus phage Javan511, complete genome {type of spacer:3 spacer:32114 TTAATATTGCGATGCGTCAGCCAACCACCC 32143 seq with PAM:CGGCATTTGT/GGTTAAAAAG }
->MK448960.1 Streptococcus phage Javan492, complete genome {type of spacer:3 spacer:32358 TTAATATTGCGATGCGTCAGCCAACCACCC 32387 seq with PAM:CGGCATTAGT/GGTTAAAAAG }
->MK448966.1 Streptococcus phage Javan508, complete genome {type of spacer:3 spacer:32943 TTAATATTGCGATGCGTCAGCCAACCACCC 32972 seq with PAM:CGGCATTTGT/GGTTAAAAAG }
->MK448698.1 Streptococcus phage Javan187, complete genome
->MK448853.1 Streptococcus phage Javan144, complete genome {type of spacer:3 spacer:10625 AGAGCGCAATTAATTATTGCGGATATTCCT 10654 seq with PAM:TGGTATGTTG/ATATTGAATC }
->MK448949.1 Streptococcus phage Javan460, complete genome {type of spacer:3 spacer:14350 AGAGCGCAATTAATTATTGCGGATATTCCT 14379 seq with PAM:TGGTATGTTG/ATATTGAATC }
->MK448952.1 Streptococcus phage Javan472, complete genome
->MK448778.1 Streptococcus phage Javan493, complete genome
->MK448961.1 Streptococcus phage Javan494, complete genome
->MK448959.1 Streptococcus phage Javan488, complete genome
->MK448977.1 Streptococcus phage Javan530, complete genome
->MK448975.1 Streptococcus phage Javan526, complete genome
->MK448973.1 Streptococcus phage Javan522, complete genome {type of spacer:3 spacer:12465 AGAGCGCAATTAATTATTGCGGATATTCCT 12494 seq with PAM:TGGTATGTTG/ATATTGAATC }
->DQ864624.1 Streptococcus phage P9, complete genome
->MK448685.1 Streptococcus phage Javan155, complete genome {type of spacer:3 spacer:10625 AGAGCGCAATTAATTATTGCGGATATTCCT 10654 seq with PAM:TGGTATGTTG/ATATTGAATC }
->MK448957.1 Streptococcus phage Javan484, complete genome
->MK448782.1 Streptococcus phage Javan501, complete genome {type of spacer:3 spacer:15111 AGAGCGCAATTAATTATTGCGGATATTCCT 15140 seq with PAM:TGGTATGTTG/ATATTGAATC }
->MK448762.1 Streptococcus phage Javan447, complete genome
->MK448958.1 Streptococcus phage Javan486, complete genome {type of spacer:3 spacer:12225 AGAGCGCAATTAATTATTGCGGATATTCCT 12254 seq with PAM:TGGTATGTTG/ATATTGAATC }
->MK448788.1 Streptococcus phage Javan511, complete genome
->MK448960.1 Streptococcus phage Javan492, complete genome
->MK448966.1 Streptococcus phage Javan508, complete genome
->MK448771.1 Streptococcus phage Javan481, complete genome {type of spacer:3 spacer:9589 AGAGCGCAATTAATTATTGCGGATATTCCT 9618 seq with PAM:TGGTATGTTG/ATATTGAATC }
->MK448795.1 Streptococcus phage Javan527, complete genome {type of spacer:3 spacer:9671 AAAGCACGGTTTACCTGCTAAACAAATTTA 9700 seq with PAM:TGGTTATATC/CATCCTTTGT }
->MK448698.1 Streptococcus phage Javan187, complete genome
->MK448853.1 Streptococcus phage Javan144, complete genome
->MK448949.1 Streptococcus phage Javan460, complete genome
->MK448959.1 Streptococcus phage Javan488, complete genome
->MK448772.1 Streptococcus phage Javan483, complete genome {type of spacer:3 spacer:6333 AAAGCACGGTTTACCTGCTAAACAAATTTA 6362 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448967.1 Streptococcus phage Javan510, complete genome {type of spacer:3 spacer:3973 AAAGCACGGTTTACCTGCTAAACAAATTTA 4002 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448975.1 Streptococcus phage Javan526, complete genome
->MK448782.1 Streptococcus phage Javan501, complete genome
->MK448762.1 Streptococcus phage Javan447, complete genome
->MK448958.1 Streptococcus phage Javan486, complete genome
->MK448796.1 Streptococcus phage Javan53, complete genome {type of spacer:3 spacer:8308 AAAGCACGGTTTACCTGCTAAACAAATTTA 8337 seq with PAM:TGGTTATATC/CATCCTTTGT }
->MK448966.1 Streptococcus phage Javan508, complete genome {type of spacer:3 spacer:6325 AAAGCACGGTTTACCTGCTAAACAAATTTA 6354 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448771.1 Streptococcus phage Javan481, complete genome
->MK448793.1 Streptococcus phage Javan523, complete genome {type of spacer:3 spacer:5443 AAAGCACGGTTTACCTGCTAAACAAATTTA 5472 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448952.1 Streptococcus phage Javan472, complete genome
->MK448778.1 Streptococcus phage Javan493, complete genome
->MK448961.1 Streptococcus phage Javan494, complete genome
->MK448977.1 Streptococcus phage Javan530, complete genome
->KY349816.1 Streptococcus phage Str01, complete genome {type of spacer:3 spacer:26134 AAAGCACGGTTTACCTGCTAAACAAATTTA 26163 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448973.1 Streptococcus phage Javan522, complete genome
->DQ864624.1 Streptococcus phage P9, complete genome
->KT388093.1 Streptococcus phage A25, complete genome {type of spacer:3 spacer:931 AAAGCACGGTTTACCTGCTAAACAAATTTA 960 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448685.1 Streptococcus phage Javan155, complete genome
->MK448957.1 Streptococcus phage Javan484, complete genome
->MK448798.1 Streptococcus phage Javan533, complete genome {type of spacer:3 spacer:3972 AAAGCACGGTTTACCTGCTAAACAAATTTA 4001 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448783.1 Streptococcus phage Javan503, complete genome {type of spacer:3 spacer:3889 AAAGCACGGTTTACCTGCTAAACAAATTTA 3918 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448788.1 Streptococcus phage Javan511, complete genome
->MK448955.1 Streptococcus phage Javan478, complete genome {type of spacer:3 spacer:5713 AAAGCACGGTTTACCTGCTAAACAAATTTA 5742 seq with PAM:TGGTTATATC/CATCCTCTGC }
->MK448960.1 Streptococcus phage Javan492, complete genome
+TGTTCCCATTGAGCCAATGCCAAACACACGACCA
+TTTGAAAGGGGTTAAGGGTAAGGAAGTTGAGTAT
+GTGGCACACCTACCTTGAATACTCAACCAGTACA
+TTCTGTTCTTCTTGATGCTTGTCGAGGCGCTGA
+CAATGTTCTCAGCTGGAAATGAGGTAATGTATA
+CAACGTTCCAACATTGTCGGCAATTTTACCTTG
+ATATTGTTAATGATAACTACAAATTTAAACGAG
+CAAACGACAAAGGTCTATCAGCCTTGTAAGGGT
+CAGAAGAATCTGATCTATTCGCCGATAATACAG
+TAGTACTGTTCCCATGTCTAAGGAGGGGTTGCG
+CTGGGGGCGCTCAGACTCGCCCTAGTGGTGTCG
+GCTTATGCGTGGGAGGCCATTGATATAGGTATA
+>MH937490.1 Streptococcus phage CHPC1036, complete genome
+>MH892381.1 Streptococcus phage SWK5, complete genome {type of spacer:0 spacer:15767 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15800 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MH892356.1 Streptococcus phage SW21, complete genome {type of spacer:0 spacer:15560 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15593 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KY705275.1 Streptococcus phage P7632, complete genome {type of spacer:0 spacer:16248 GTGGCACACCTACCTTGAATACTCAACCAGTACA 16281 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KY705260.1 Streptococcus phage P5651, complete genome {type of spacer:0 spacer:15363 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15396 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MH892379.1 Streptococcus phage SWK3, complete genome {type of spacer:0 spacer:15534 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15567 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KY705283.1 Streptococcus phage P8922, complete genome {type of spacer:0 spacer:16200 GTGGCACACCTACCTTGAATACTCAACCAGTACA 16233 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KY705261.1 Streptococcus phage P5652, complete genome {type of spacer:0 spacer:14875 GTGGCACACCTACCTTGAATACTCAACCAGTACA 14908 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KY705251.1 Streptococcus phage P0091, complete genome
+>MH973662.1 Streptococcus phage SW7, complete genome {type of spacer:0 spacer:15707 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15740 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MH937474.1 Streptococcus phage CHPC930, complete genome
+>MH892354.1 Streptococcus phage SW3, complete genome
+>MH937508.1 Streptococcus phage CHPC1156, complete genome
+>MH937462.1 Streptococcus phage CHPC663, complete genome
+>MH892380.1 Streptococcus phage SWK4, complete genome {type of spacer:0 spacer:15534 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15567 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MH000602.1 Streptococcus phage D5842, complete genome {type of spacer:0 spacer:17015 GTGGCACACCTACCTTGAATACTCAACCAGTACA 17048 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MF580761.1 Streptococcus phage 9A, complete genome {type of spacer:0 spacer:15076 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15109 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KY705274.1 Streptococcus phage P7631, complete genome {type of spacer:0 spacer:16034 GTGGCACACCTACCTTGAATACTCAACCAGTACA 16067 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MH937465.1 Streptococcus phage CHPC873, complete genome
+>KY705267.1 Streptococcus phage P7154, complete genome {type of spacer:0 spacer:16198 GTGGCACACCTACCTTGAATACTCAACCAGTACA 16231 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>AF145054.1 Streptococcus thermophilus bacteriophage 7201, complete genome {type of spacer:0 spacer:26021 GTGGCACACCTACCTTGAATACTCAACCAGTACA 26054 seq with PAM:TTTGACTTTA/ACTGACAAAC }
+>MH892377.1 Streptococcus phage SWK1, complete genome {type of spacer:0 spacer:15703 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15736 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KY705265.1 Streptococcus phage P7151, complete genome {type of spacer:0 spacer:16486 GTGGCACACCTACCTTGAATACTCAACCAGTACA 16519 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KT717085.1 Streptococcus phage 128, complete genome {type of spacer:0 spacer:15183 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15216 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>KY705266.1 Streptococcus phage P7152, complete genome {type of spacer:0 spacer:15450 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15483 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MG708274.1 Streptococcus phage vB_SthS_VA214, complete genome {type of spacer:3 spacer:22133 TGTACTGGTTGAGTATTCAAGGTAGGTGTGCCAT 22166 seq with PAM:CTTGACTTCA/ACTGACAAAC }
+>MH892378.1 Streptococcus phage SWK2, complete genome {type of spacer:0 spacer:16172 GTGGCACACCTACCTTGAATACTCAACCAGTACA 16205 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MH892382.1 Streptococcus phage SWK6, complete genome {type of spacer:0 spacer:15643 GTGGCACACCTACCTTGAATACTCAACCAGTACA 15676 seq with PAM:TTTGACTTTA/ACTGACGAGC }
+>MH892357.1 Streptococcus phage SW8, complete genome

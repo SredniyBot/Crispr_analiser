@@ -80,27 +80,34 @@ public class WebLogo {
 
 
 	private static void show_weblogo () {
-		BufferedImage imgleft=null;
+		BufferedImage imgleft = null;
 		BufferedImage imgright=null;
 		try {
 			try {
+				Thread.sleep(10000);
+
 				while(!new File("src/res/logos/left_logo.png").exists()&&!new File("src/res/logos/right_logo.png").exists()){
+					Thread.sleep(500);
+				}
+				while(!new File("src/res/logos/left_logo.png").canRead()&&!new File("src/res/logos/right_logo.png").canRead()){
 					Thread.sleep(500);
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-
 			imgleft = ImageIO.read(new File("src/res/logos/left_logo.png"));
 			imgright = ImageIO.read(new File("src/res/logos/right_logo.png"));
-
 		} catch (IOException  e) {
 			e.printStackTrace();
 		}
-		resultPanel.leftPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgleft,340,300)));
-		resultPanel.rightPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgright,340,300)));
-	}
+		try{
+			resultPanel.leftPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgleft,330,300)));
+			resultPanel.rightPam.setIcon(new ImageIcon(resultPanel.resizeImage(imgright,330,300)));
+		} catch (NullPointerException e){
+			resultPanel.Error("Weblogo Error");
+		}
+		}
+
 
 
 }

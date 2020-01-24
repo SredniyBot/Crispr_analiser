@@ -23,7 +23,7 @@ public class BlastApi {
 		try {
 			String mbRID=checkForPreviousAttempts(query);
 			String RID = "";
-			String s=null;
+			String s="";
 			if(Program.TEST){
 				s="";
 			}else if(PreviousRidfound&&checkRID(mbRID)){
@@ -38,9 +38,10 @@ public class BlastApi {
 				String RTOE = s.substring(s.lastIndexOf("RTOE") + 5, s.length() - 1).replace("/n", "").replace(" ", "");
 				Thread.sleep(Integer.parseInt(RTOE) * 1000);
 				s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID=" + RID, "GET");
-				tryToBlast(RID);
+				s=tryToBlast(RID);
 			}
-			if(!s.equals(null)) {
+
+			if(!s.isEmpty()) {
 				if(!Program.TEST) {
 					Date date = new Date();
 					removeRID(query);
@@ -108,20 +109,20 @@ public class BlastApi {
 			if (s.contains("Status=WAITING")) {
 				System.out.println("wait");
 			} else if (s.contains("Status=FAILED")) {
-				return null;
+				return "";
 			} else if (s.contains("Status=UNKNOWN")) {
-				return null;
+				return "";
 			} else if (s.contains("Status=READY")) {
 				if (s.contains("ThereAreHits=yes")) {
 					//System.out.println(s);
 					return s;
 				} else {
 					System.out.println("No results");
-					return null;
+					return "";
 				}
 			}
 		}
-		return null;
+		return "";
 	}
 
 
