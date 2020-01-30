@@ -40,6 +40,7 @@ public class resultPanel extends JPanel{
 		}
 		REPEATS_N_SPACERS_AREA.setText(REPEATS_N_SPACERS);
 	}
+
 	public static void Status(String st){
 		Status.setText(st);
 	}

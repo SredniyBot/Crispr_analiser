@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Program {
@@ -82,15 +83,23 @@ public class Program {
 
     private static JCheckBox createJCheckBox(int x, int y, int width, int height, String Name) {
         JCheckBox checkbox = new JCheckBox(Name);
-        checkbox.addItemListener(new ItemListener() {
+        checkbox.addActionListener(new ActionListener() {
             @Override
-            public void itemStateChanged(ItemEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 switch (Name) {
                     case check2:
                         download_results = !download_results;
                         if (download_results) {
-                            name_of_directory = JOptionPane.showInputDialog("Insert name of new directory");
+                            name_of_directory = JOptionPane.showInputDialog("Insert absolute name of new directory");
+
+                            if(!(new File(name_of_directory).isAbsolute()&&new File(name_of_directory).isDirectory()&&new File(name_of_directory).exists())){
+                                download_results=false;
+                                checkbox.setSelected(false);
+                                JOptionPane.showMessageDialog(null,"Wrong directory");
+                            }
+                            name_of_directory=name_of_directory+"/";
                         }
+
                         break;
                     case check1:
                         wide_search = !wide_search;
@@ -117,6 +126,9 @@ public class Program {
 
 
     private static void window_with_panel(String s) {// ���� � ������������ ����������String s
+        if (TEST&&wide_search){
+            wide_search=false;
+        }
         GENOME = s;
         SecondThread = new SecThread();
         SecondThread.start();

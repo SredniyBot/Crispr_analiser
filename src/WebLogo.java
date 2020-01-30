@@ -26,10 +26,14 @@ public class WebLogo {
 			resultPanel.Error("input.fa ERROR");
 			System.out.println(ex.getMessage());
 		}
-		System.out.println("qwert");
-		String cmdString = "weblogo -f input.fa -F png -o src/res/logos/right_logo.png -U probability -s large -A dna -t RIGHT_PAM";
+
 		try {
+			String cmdString = "weblogo -f input.fa -F png -o src/res/logos/right_logo.png -U probability -s large -A dna -t RIGHT_PAM";
 			Runtime.getRuntime().exec(cmdString);
+			if(Program.download_results){
+				cmdString = "weblogo -f input.fa -F png -o "+Program.name_of_directory+"right_logo.png -U probability -s large -A dna -t RIGHT_PAM";
+				Runtime.getRuntime().exec(cmdString);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			resultPanel.Error("Weblogo_create_ERROR");
@@ -50,16 +54,18 @@ public class WebLogo {
 			resultPanel.Error("input.fa ERROR");
 			System.out.println(ex.getMessage());
 		}
-		System.out.println("qwert");
+
 		String cmdString = "weblogo -f input1.fa -F png -o src/res/logos/left_logo.png -U probability -s large -A dna -t LEFT_PAM";
 		try {
 			Runtime.getRuntime().exec(cmdString);
+			if(Program.download_results){
+				cmdString = "weblogo -f input1.fa -F png -o "+Program.name_of_directory+"left_logo.png -U probability -s large -A dna -t LEFT_PAM";
+				Runtime.getRuntime().exec(cmdString);
+			}
 		} catch (IOException e) {
 			resultPanel.Error("Weblogo_create_ERROR");
 			e.printStackTrace();
 		}
-
-
 	}
 
 

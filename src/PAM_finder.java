@@ -99,11 +99,6 @@ public class PAM_finder {
 			h.add(i.substring(0,pam_size+1));
 		}
 		WebLogo.logos(h,g);
-		//WebLogo.logo1(h);
-//	if(Programm.download_resalts) {
-//		WebLogo.download();
-//	}
-
 	}
 	
 	

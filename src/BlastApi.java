@@ -25,10 +25,10 @@ public class BlastApi {
 			String RID = "";
 			String s="";
 			if(Program.TEST){
-				s="";
+				s="notEmpty";
 			}else if(PreviousRidfound&&checkRID(mbRID)){
 				RID=mbRID;
-				s="";
+				s="notEmpty";
 			}else {
 				s = firsth_output(query);
 				s = s.substring(s.lastIndexOf("QBlastInfoBegin") + 16, s.lastIndexOf("QBlastInfoEnd")).replace("/n", "").replace(" ", "");
@@ -42,13 +42,13 @@ public class BlastApi {
 			}
 
 			if(!s.isEmpty()) {
+				resultPanel.Status("Downloading viral genome");
 				if(!Program.TEST) {
 					Date date = new Date();
 					removeRID(query);
 					writeRid(query, date.getYear() + "," + date.getMonth() + "." + date.getDay() + "-" + date.getHours(), RID.replace("\n", ""));
 					System.out.println(RID);
 					s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID=" + RID, "GET");
-					resultPanel.Status("Downloading viral genome");
 					s = s.substring(s.indexOf("ALIGNMENTS"));
 					number_of_genome.clear();
 					System.out.println(query);
@@ -58,7 +58,7 @@ public class BlastApi {
 						number_of_genome.add((s.substring(0,s.indexOf("\n"))).substring(0,s.indexOf(" ")));
 					}
 				}else{
-					resultPanel.Status("Downloading viral genome");
+
 					s=Test(query);
 					while(s.contains(">")) {
 						s = s.substring(s.indexOf(">") + 1);

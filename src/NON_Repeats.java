@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,41 +43,81 @@ public class NON_Repeats {
 	 * ��������� ����������� ������ � ������ ��������
 	*/
 	 public static void start() {
+	 	if(Program.download_results){
+			try {
+				System.out.println(Program.name_of_directory+"spacer.txt");
+				new File(Program.name_of_directory+"spacer.txt").createNewFile();
+			} catch (IOException e) {
+				resultPanel.Error("spacer.txt create error");
+				Program.download_results=false;
+			}
+		}
 		 if(!Program.wide_search) {
 			 for(String[] d: spacers) {
 				 try {
 					 Map<String,String> Genome=BlastApi.request(d[0]);
 					 if(!Genome.isEmpty()) {
-					 bacteriophages.addAll(Genome.keySet());
-					 for(String k:Genome.keySet()) {
-						 try(FileWriter writer = new FileWriter("spacer.txt", false)){
-							 output+= k;
-						        writer.write(output);
-						        writer.flush();
-						    }
-						    catch(IOException ex){
-						        System.out.println(ex.getMessage());
-						        resultPanel.Error("spacer.txt is not allowed");
-						    }
-						 resultPanel.Status("Alignment of spacer and genome");
-						 search(Genome.get(k),d);
-						 
-						 
+						 bacteriophages.addAll(Genome.keySet());
+						 for(String k:Genome.keySet()) {
+							 try(FileWriter writer = new FileWriter("spacer.txt", false)){
+								 output+= k;
+									writer.write(output);
+									writer.flush();
+								 if(Program.download_results){
+									 FileWriter writer1 = new FileWriter(Program.name_of_directory+"spacer.txt", false);
+									 writer1.write(output);
+									 writer1.flush();
+								 }
+								}
+								catch(IOException ex){
+									System.out.println(ex.getMessage());
+									resultPanel.Error("spacer.txt is not allowed");
+								}
+							 resultPanel.Status("Alignment of spacer and genome");
+							 search(Genome.get(k),d);
+						 }
+					 }else{
+						 System.out.println("Lost connection");
 					 }
-				 }else{
-					 System.out.println("Lost connection");
-				 }} catch (InterruptedException e) {
-					//System.out.println("Problem with blast");
+				 } catch (InterruptedException e) {
 					resultPanel.Error("THREAD_ERROR");
 				}
 			 }
-			 PAM_finder.try_to_find();
-			 
 		 }else {
-			 
-			 
-			 
+			 for (int number = 0; number < 4; number++) {
+				 for (String[] d : spacers) {
+					 try {
+						 Map<String, String> Genome = BlastApi.request(d[number]);
+						 if (!Genome.isEmpty()) {
+							 bacteriophages.addAll(Genome.keySet());
+							 for (String k : Genome.keySet()) {
+								 try (FileWriter writer = new FileWriter("spacer.txt", false)) {
+									 output += k;
+									 writer.write(output);
+									 writer.flush();
+									 if(Program.download_results){
+										 FileWriter writer1 = new FileWriter(Program.name_of_directory+"spacer.txt", false);
+										 writer1.write(output);
+										 writer1.flush();
+									 }
+								 } catch (IOException ex) {
+									 System.out.println(ex.getMessage());
+									 resultPanel.Error("spacer.txt is not allowed");
+								 }
+								 resultPanel.Status("Alignment of spacer and genome");
+								 search(Genome.get(k), d);
+							 }
+						 } else {
+							 System.out.println("Lost connection");
+						 }
+					 } catch (InterruptedException e) {
+						 //System.out.println("Problem with blast");
+						 resultPanel.Error("THREAD_ERROR");
+					 }
+				 }
+			 }
 		 }
+		 PAM_finder.try_to_find();
 		 resultPanel.Status("Done");
 	 }
 
@@ -115,36 +156,24 @@ public class NON_Repeats {
 						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+"/"+swap(genome.substring(s-10,s))+" }";
 						pams.add(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10));
 						System.out.print(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10));
-						
 						pams1.add(swap(genome.substring(s-10,s)));
 						System.out.println(swap(genome.substring(s-10,s)));
-						
 					}else if(variant_of_spacer==1) {
 						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+swap(genome.substring(s-10,s))+"/"+genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" }";
 						pams.add(swap(genome.substring(s-10,s)));
 						System.out.println(swap(genome.substring(s-10,s))+" swapped");
-						
-						
 						pams1.add(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10));
 						System.out.println(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" swapped");
-						
 					}else if(variant_of_spacer==2) {
 						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+ complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+"/"+ complimentary(genome.substring(s-10,s))+" }";
 						pams.add(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)));
 						System.out.println(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" comp"));
-						
-						
 						pams1.add(swap(complimentary(genome.substring(s-10,s))));
 						System.out.println(swap(complimentary(genome.substring(s-10,s)+" comp")));
-						
-						
 					}else if(variant_of_spacer==3) {
 						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+ complimentary(swap(genome.substring(s-10,s)))+"/"+ complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+" }";
 						pams.add(complimentary(swap(genome.substring(s-10,s))));
 						System.out.println(complimentary(swap(genome.substring(s-10,s)))+" comp swapped");
-						
-						
-						
 						pams1.add(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)));
 						System.out.println(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+" comp swapped");
 					}
