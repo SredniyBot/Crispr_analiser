@@ -90,9 +90,9 @@ public class Program {
                     case check2:
                         download_results = !download_results;
                         if (download_results) {
-                            name_of_directory = JOptionPane.showInputDialog("Insert absolute name of new directory");
+                            name_of_directory = JOptionPane.showInputDialog(null,"Insert absolute name of new directory","Input path",JOptionPane.QUESTION_MESSAGE);
 
-                            if(!(new File(name_of_directory).isAbsolute()&&new File(name_of_directory).isDirectory()&&new File(name_of_directory).exists())){
+                            if(!(name_of_directory!=null&&new File(name_of_directory).isAbsolute()&&new File(name_of_directory).isDirectory()&&new File(name_of_directory).exists()&&name_of_directory.isEmpty())){
                                 download_results=false;
                                 checkbox.setSelected(false);
                                 JOptionPane.showMessageDialog(null,"Wrong directory");
