@@ -28,10 +28,12 @@ public class WebLogo {
 		}
 
 		try {
-			String cmdString = "weblogo -f input.fa -F png -o src/res/logos/right_logo.png -U probability -s large -A dna -t RIGHT_PAM";
+			String cmdString = "weblogo -f input.fa -F png -o src/res/logos/right_logo.png" +
+					" -U probability -s large -A dna -t RIGHT_PAM";
 			Runtime.getRuntime().exec(cmdString);
 			if(Program.download_results){
-				cmdString = "weblogo -f input.fa -F png -o "+Program.name_of_directory+"right_logo.png -U probability -s large -A dna -t RIGHT_PAM";
+				cmdString = "weblogo -f input.fa -F png -o "+Program.name_of_directory+"right_logo.png" +
+						" -U probability -s large -A dna -t RIGHT_PAM";
 				Runtime.getRuntime().exec(cmdString);
 			}
 		} catch (IOException e) {
@@ -55,11 +57,13 @@ public class WebLogo {
 			System.out.println(ex.getMessage());
 		}
 
-		String cmdString = "weblogo -f input1.fa -F png -o src/res/logos/left_logo.png -U probability -s large -A dna -t LEFT_PAM";
+		String cmdString = "weblogo -f input1.fa -F png -o src/res/logos/left_logo.png" +
+				" -U probability -s large -A dna -t LEFT_PAM";
 		try {
 			Runtime.getRuntime().exec(cmdString);
 			if(Program.download_results){
-				cmdString = "weblogo -f input1.fa -F png -o "+Program.name_of_directory+"left_logo.png -U probability -s large -A dna -t LEFT_PAM";
+				cmdString = "weblogo -f input1.fa -F png -o "+Program.name_of_directory+"left_logo.png" +
+						" -U probability -s large -A dna -t LEFT_PAM";
 				Runtime.getRuntime().exec(cmdString);
 			}
 		} catch (IOException e) {
@@ -92,10 +96,12 @@ public class WebLogo {
 			try {
 				Thread.sleep(10000);
 
-				while(!new File("src/res/logos/left_logo.png").exists()&&!new File("src/res/logos/right_logo.png").exists()){
+				while(!new File("src/res/logos/left_logo.png").exists()
+						&&!new File("src/res/logos/right_logo.png").exists()){
 					Thread.sleep(500);
 				}
-				while(!new File("src/res/logos/left_logo.png").canRead()&&!new File("src/res/logos/right_logo.png").canRead()){
+				while(!new File("src/res/logos/left_logo.png").canRead()
+						&&!new File("src/res/logos/right_logo.png").canRead()){
 					Thread.sleep(500);
 				}
 			} catch (InterruptedException e) {

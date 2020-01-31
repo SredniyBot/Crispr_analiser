@@ -18,7 +18,9 @@ public class Programm {
         JTextArea area = new JTextArea(5,30);
         JButton b1= new JButton("Enter");
         JButton b2 = new JButton("?");
-        JScrollPane scroll = new JScrollPane(area,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scroll = new JScrollPane(area,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         p.setLayout(new FlowLayout());
         b1.addActionListener(new ActionListener() {
             @Override

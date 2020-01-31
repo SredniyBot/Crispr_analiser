@@ -64,7 +64,8 @@ public class NON_Repeats {
 									writer.write(output);
 									writer.flush();
 								 if(Program.download_results){
-									 FileWriter writer1 = new FileWriter(Program.name_of_directory+"spacer.txt", false);
+									 FileWriter writer1 = new FileWriter(Program.name_of_directory+
+											 "spacer.txt", false);
 									 writer1.write(output);
 									 writer1.flush();
 								 }
@@ -96,7 +97,8 @@ public class NON_Repeats {
 									 writer.write(output);
 									 writer.flush();
 									 if(Program.download_results){
-										 FileWriter writer1 = new FileWriter(Program.name_of_directory+"spacer.txt", false);
+										 FileWriter writer1 = new FileWriter(Program.name_of_directory+
+												 "spacer.txt", false);
 										 writer1.write(output);
 										 writer1.flush();
 									 }
@@ -128,7 +130,9 @@ public class NON_Repeats {
 	 */
 	public static void search(String genome,String [] spacer) {
 		int length_of_string=spacer[0].length()/2-2;
-		genome=genome.replace("\n", "").replace('g','G').replace('c','C').replace('t','T').replace('a','A').replace("\r","");
+		genome=genome.replace("\n", "").replace('g','G')
+				.replace('c','C').replace('t','T').replace('a','A')
+				.replace("\r","");
 		for(int variant_of_spacer=0;variant_of_spacer<4;variant_of_spacer++) {
 			ArrayList<ArrayList<Integer>> arr =new ArrayList<>();
 			for(int tab=0;tab<spacer[variant_of_spacer].length()-length_of_string;tab++) {
@@ -137,7 +141,6 @@ public class NON_Repeats {
 				ArrayList<Integer> place_of_spacer= new ArrayList<>();
 				while(genome.substring(location+1).contains(small_spacer)) {
 					place_of_spacer.add(genome.indexOf(small_spacer, location+1));
-					//System.out.print(genome.substring(genome.indexOf(small_spacer, location+1),genome.indexOf(small_spacer, location+1)+20).length());
 					location=genome.indexOf(small_spacer, location+1);
 				}
 			arr.add(place_of_spacer);
@@ -153,29 +156,62 @@ public class NON_Repeats {
 				}
 				if(hit/(arr.size()-1)*100>= percent_of_hits) {
 					if(variant_of_spacer==0) {
-						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+"/"+swap(genome.substring(s-10,s))+" }";
-						pams.add(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10));
-						System.out.print(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10));
+						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "
+								+genome.substring(s,s+spacer[variant_of_spacer].length())+" "
+								+(s+spacer[variant_of_spacer].length()-1)
+								+" seq with PAM:"
+								+genome.substring(s+spacer[variant_of_spacer].length(),
+								s+spacer[variant_of_spacer].length()+10)
+								+"/"+swap(genome.substring(s-10,s))+" }";
+
+						pams.add(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10));
+						System.out.print(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10));
 						pams1.add(swap(genome.substring(s-10,s)));
 						System.out.println(swap(genome.substring(s-10,s)));
 					}else if(variant_of_spacer==1) {
-						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+swap(genome.substring(s-10,s))+"/"+genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" }";
+						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "
+								+genome.substring(s,s+spacer[variant_of_spacer].length())+" "
+								+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+
+								swap(genome.substring(s-10,s))+"/"+
+								genome.substring(s+spacer[variant_of_spacer]
+										.length(),s+spacer[variant_of_spacer].length()+10)+" }";
+
 						pams.add(swap(genome.substring(s-10,s)));
 						System.out.println(swap(genome.substring(s-10,s))+" swapped");
-						pams1.add(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10));
-						System.out.println(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" swapped");
+						pams1.add(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10));
+						System.out.println(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10)+" swapped");
 					}else if(variant_of_spacer==2) {
-						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+ complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+"/"+ complimentary(genome.substring(s-10,s))+" }";
-						pams.add(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)));
-						System.out.println(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)+" comp"));
+						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "
+								+genome.substring(s,s+spacer[variant_of_spacer].length())
+								+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"
+								+ complimentary(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10))
+								+"/"+ complimentary(genome.substring(s-10,s))+" }";
+
+						pams.add(complimentary(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10)));
+						System.out.println(complimentary(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10)+" comp"));
 						pams1.add(swap(complimentary(genome.substring(s-10,s))));
 						System.out.println(swap(complimentary(genome.substring(s-10,s)+" comp")));
 					}else if(variant_of_spacer==3) {
-						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "+genome.substring(s,s+spacer[variant_of_spacer].length())+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+ complimentary(swap(genome.substring(s-10,s)))+"/"+ complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+" }";
+						output+=" {type of spacer:"+variant_of_spacer+" spacer:"+s+" "
+								+genome.substring(s,s+spacer[variant_of_spacer].length())
+								+" "+(s+spacer[variant_of_spacer].length()-1)+" seq with PAM:"+
+								complimentary(swap(genome.substring(s-10,s)))+"/"
+								+ complimentary(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10))+" }";
+
 						pams.add(complimentary(swap(genome.substring(s-10,s))));
 						System.out.println(complimentary(swap(genome.substring(s-10,s)))+" comp swapped");
-						pams1.add(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10)));
-						System.out.println(complimentary(genome.substring(s+spacer[variant_of_spacer].length(),s+spacer[variant_of_spacer].length()+10))+" comp swapped");
+						pams1.add(complimentary(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10)));
+						System.out.println(complimentary(genome.substring(s+spacer[variant_of_spacer]
+								.length(),s+spacer[variant_of_spacer].length()+10))+" comp swapped");
 					}
 				}
 				hit=0;

@@ -13,7 +13,8 @@ public class Program {
     public static String GENOME;
     public static boolean wide_search = false, show_weblogo = false, download_results = false;//� ����������
     public static String name_of_directory = "new";
-    private final static String btn1 = "\nEnter\n", btn2 = "Find proteins",btn3="?", check1 = "Wide search", check2 = "Download results", check3 = "Test program";
+    private final static String btn1 = "\nEnter\n", btn2 = "Find proteins",btn3="?",
+            check1 = "Wide search", check2 = "Download results", check3 = "Test program";
     private static JFrame w = new JFrame("CRISPR ANALYSER");
     private static SecThread SecondThread;
     private static JTextArea area;
@@ -34,7 +35,9 @@ public class Program {
         }
         area = new JTextArea(5, 40);
         area.setDisabledTextColor(Color.BLACK);
-        JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scroll = new JScrollPane(area,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         p.add(scroll);
         p.add(createButton(605, 0, 80, 80, btn1));
         p.add(createJCheckBox(10, 50, 101, 20, check1));
@@ -90,9 +93,14 @@ public class Program {
                     case check2:
                         download_results = !download_results;
                         if (download_results) {
-                            name_of_directory = JOptionPane.showInputDialog(null,"Insert absolute name of new directory","Input path",JOptionPane.QUESTION_MESSAGE);
+                            name_of_directory = JOptionPane.showInputDialog(null,
+                                    "Insert absolute name of new directory",
+                                    "Input path",
+                                    JOptionPane.QUESTION_MESSAGE);
 
-                            if(!(name_of_directory!=null&&new File(name_of_directory).isAbsolute()&&new File(name_of_directory).isDirectory()&&new File(name_of_directory).exists()&&name_of_directory.isEmpty())){
+                            if(!(name_of_directory!=null&&new File(name_of_directory).isAbsolute()&&
+                                    new File(name_of_directory).isDirectory()&&
+                                    new File(name_of_directory).exists()&&name_of_directory.isEmpty())){
                                 download_results=false;
                                 checkbox.setSelected(false);
                                 JOptionPane.showMessageDialog(null,"Wrong directory");
@@ -137,7 +145,9 @@ public class Program {
         resultPanel p = new resultPanel(area1);
         JLabel status=resultPanel.Status;
         area1.setDisabledTextColor(Color.BLACK);
-        JScrollPane scroll = new JScrollPane(area1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scroll = new JScrollPane(area1,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         Image img = null;
         try {
             img = ImageIO.read(new File("src/PAM_PIC.jpg"));

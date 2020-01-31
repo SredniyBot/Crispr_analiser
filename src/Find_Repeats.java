@@ -38,7 +38,8 @@ public class Find_Repeats {
 			for(int i = 0;i<=count_of_nucleotides;i++) {
 				intermedia_gen =intermedia_gen+gen.get(i);
 			}
-			hit1= compare1(count_of_nucleotides,gen.size()-1,gen.size()-1-count_of_nucleotides+21,gen);
+			hit1= compare1(count_of_nucleotides,gen.size()-1,
+					gen.size()-1-count_of_nucleotides+21,gen);
 			for(int i = 0;i<=count_of_nucleotides;i++) {
 				intermedia_gen1 =intermedia_gen1+gen.get(gen.size()-1-i);
 			}
@@ -53,8 +54,10 @@ public class Find_Repeats {
 						}
 					}
 
-					if(hit1<= compare1(count_of_nucleotides,gen.size()-1-first_compare,gen.size()-1-(second_compare+first_compare),gen)) {
-						hit1= compare1(count_of_nucleotides,gen.size()-1-first_compare,gen.size()-1-second_compare-first_compare,gen);
+					if(hit1<= compare1(count_of_nucleotides,gen.size()-1-first_compare,
+							gen.size()-1-(second_compare+first_compare),gen)) {
+						hit1= compare1(count_of_nucleotides,gen.size()-1-first_compare,
+								gen.size()-1-second_compare-first_compare,gen);
 						intermedia_gen1="";
 						for(int i = 0;i<=count_of_nucleotides;i++) {
 							intermedia_gen1 =gen.get(gen.size()-1-(first_compare+i))+intermedia_gen1;
@@ -68,7 +71,8 @@ public class Find_Repeats {
 				Set<Integer> set = new HashSet<Integer>();
 				for(int compare =0;compare<gen.size()-intermedia_gen.length()+1;compare++) {
 					for(int number_of_nucleotid=0;number_of_nucleotid<intermedia_gen.length();number_of_nucleotid++) {
-						if(gen.get(compare+number_of_nucleotid).equals(String.valueOf(intermedia_gen.charAt(number_of_nucleotid)))) {
+						if(gen.get(compare+number_of_nucleotid).equals(
+								String.valueOf(intermedia_gen.charAt(number_of_nucleotid)))) {
 							hit+=1;
 						}
 
@@ -180,10 +184,12 @@ public class Find_Repeats {
 	 * @param second_compare ����� 1 ������� 2 �������
 	 * @param genbank ������ �� ������� ���� ������, �������������� ����� �����
 	 */
-	private static int compare(int count_of_nucleotids, int first_compare, int second_compare, ArrayList<String> genbank) {//
+	private static int compare(int count_of_nucleotids, int first_compare,
+							   int second_compare, ArrayList<String> genbank) {
 		int schetchik = 0;
 		for(int number_of_nucleotid=0;number_of_nucleotid<count_of_nucleotids;number_of_nucleotid++) {
-			if(genbank.get(first_compare+number_of_nucleotid).equals(genbank.get(second_compare+number_of_nucleotid))) {
+			if(genbank.get(first_compare+number_of_nucleotid)
+					.equals(genbank.get(second_compare+number_of_nucleotid))) {
 				schetchik+=1;
 			}
 		}
@@ -198,7 +204,8 @@ public class Find_Repeats {
 	 * @param second_compare ����� 1 ������� 2 �������
 	 * @param genbank ������ �� ������� ���� ������, �������������� ����� �����
 	 */
-	private static int compare1(int count_of_nucleotids, int first_compare, int second_compare, ArrayList<String> genbank) {
+	private static int compare1(int count_of_nucleotids, int first_compare,
+								int second_compare, ArrayList<String> genbank) {
 		int schetchik = 0;
 		for(int number_of_nucleotid=0;number_of_nucleotid<count_of_nucleotids;number_of_nucleotid++) {
 			if(genbank.get(first_compare-number_of_nucleotid).equals(genbank.get(second_compare-number_of_nucleotid))) {

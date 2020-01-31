@@ -31,13 +31,17 @@ public class BlastApi {
 				s="notEmpty";
 			}else {
 				s = firsth_output(query);
-				s = s.substring(s.lastIndexOf("QBlastInfoBegin") + 16, s.lastIndexOf("QBlastInfoEnd")).replace("/n", "").replace(" ", "");
-				RID = s.substring(4, s.lastIndexOf("RTOE")).replace("/n", "").replace(" ", "");
+				s = s.substring(s.lastIndexOf("QBlastInfoBegin") + 16, s.lastIndexOf("QBlastInfoEnd"))
+						.replace("/n", "").replace(" ", "");
+				RID = s.substring(4, s.lastIndexOf("RTOE")).replace("/n", "")
+						.replace(" ", "");
 				writeRid(query,mbRID,RID.replace("\n",""));
 				System.out.println(RID);
-				String RTOE = s.substring(s.lastIndexOf("RTOE") + 5, s.length() - 1).replace("/n", "").replace(" ", "");
+				String RTOE = s.substring(s.lastIndexOf("RTOE") + 5, s.length() - 1)
+						.replace("/n", "").replace(" ", "");
 				Thread.sleep(Integer.parseInt(RTOE) * 1000);
-				s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID=" + RID, "GET");
+				s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID="
+						+ RID, "GET");
 				s=tryToBlast(RID);
 			}
 
@@ -46,9 +50,11 @@ public class BlastApi {
 				if(!Program.TEST) {
 					Date date = new Date();
 					removeRID(query);
-					writeRid(query, date.getYear() + "," + date.getMonth() + "." + date.getDay() + "-" + date.getHours(), RID.replace("\n", ""));
+					writeRid(query, date.getYear() + "," + date.getMonth() + "." + date.getDay() + "-"
+							+ date.getHours(), RID.replace("\n", ""));
 					System.out.println(RID);
-					s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID=" + RID, "GET");
+					s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID="
+							+ RID, "GET");
 					s = s.substring(s.indexOf("ALIGNMENTS"));
 					number_of_genome.clear();
 					System.out.println(query);
@@ -102,7 +108,8 @@ public class BlastApi {
 			attempt++;
 			try {
 				Thread.sleep(10000);
-				s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID=" + RID, "GET");
+				s = output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_OBJECT=SearchInfo&RID="
+						+ RID, "GET");
 			} catch (InterruptedException | IOException e) {
 				resultPanel.Error("BLAST error");
 			}
@@ -133,7 +140,8 @@ public class BlastApi {
 			String m= "";
 			try {
 				Thread.sleep(300);
-				m = output("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id="+number_of_genome.get(i)+"&rettype=fasta&retmode=text","GET");
+				m = output("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id="
+						+number_of_genome.get(i)+"&rettype=fasta&retmode=text","GET");
 				genome.put(m.substring(0,m.indexOf("\n")),m.substring(m.indexOf("\n")));
 			} catch (IOException | InterruptedException e) {
 				resultPanel.Error("Fasta download error");
@@ -155,9 +163,11 @@ public class BlastApi {
 		}
 		if(content.contains(query)){
 			content=content.substring(content.indexOf(query)-1);
-			if(subS(content,"[",",").equals(String.valueOf(date.getYear()))&&subS(content,",",".").equals(String.valueOf(date.getMonth()))&&
+			if(subS(content,"[",",").equals(String.valueOf(date.getYear()))&&subS(content,",",".")
+					.equals(String.valueOf(date.getMonth()))&&
 					(subS(content,".","-").equals(String.valueOf(date.getDay()))||
-							(date.getYear()<Integer.valueOf(subS(content,"-","]")).intValue()&&Integer.valueOf(subS(content,".","-")).intValue()-date.getDay()<=1))){
+							(date.getYear()<Integer.valueOf(subS(content,"-","]")).intValue()&&
+									Integer.valueOf(subS(content,".","-")).intValue()-date.getDay()<=1))){
 				PreviousRidfound=true;
 				return subS(content,"{","}");
 			}else{
@@ -170,7 +180,8 @@ public class BlastApi {
 
 	private static boolean checkRID(String RID){
 		try {
-			return output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID="+RID,"GET").contains("ALIGNMENTS");
+			return output("https://blast.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&FORMAT_TYPE=Text&RID="
+					+RID,"GET").contains("ALIGNMENTS");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -267,7 +278,8 @@ public class BlastApi {
 			connection.setRequestMethod("POST");
 			String h = "QUERY=" + query + "&DATABASE=nt"+ "&PROGRAM=blastn"+"&Q_MENU=bacteriophage (taxid:38018)"+
 					"&NUM_ORG=2"+"&EQ_MENU1=bacteria (taxid:2)" +"&ORG_EXCLUDE1=on"+"&MEGABLAST=on"+
-					"&Content-Type=application/x-www-form-urlencoded"+"&CMD=Put"+"&FILTER=L"+"&FILTER=m"+"&FORMAT_NUM_ORG=1";
+					"&Content-Type=application/x-www-form-urlencoded"+"&CMD=Put"+"&FILTER=L"
+					+"&FILTER=m"+"&FORMAT_NUM_ORG=1";
 			connection.setDoOutput(true);
 			connection.setDoInput(true);
 			connection.setUseCaches(false);

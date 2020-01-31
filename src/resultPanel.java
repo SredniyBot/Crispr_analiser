@@ -19,8 +19,12 @@ public class resultPanel extends JPanel{
 		try {
 			leftPam = new JLabel();
 			rightPam = new JLabel();
-			leftPam.setIcon(new ImageIcon(resizeImage((BufferedImage)ImageIO.read(new File("src/res/icons/2.png")),330,300)));
-			rightPam.setIcon(new ImageIcon(resizeImage((BufferedImage)ImageIO.read(new File("src/res/icons/2.png")),330,300)));
+			leftPam.setIcon(new ImageIcon(
+					resizeImage((BufferedImage)ImageIO.read(
+							new File("src/res/icons/2.png")),330,300)));
+			rightPam.setIcon(new ImageIcon(
+					resizeImage((BufferedImage)ImageIO.read(
+							new File("src/res/icons/2.png")),330,300)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

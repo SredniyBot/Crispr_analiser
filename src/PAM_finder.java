@@ -47,7 +47,8 @@ public class PAM_finder {
 					
 				}
 				
-				if((float)A/(float)pams.size()*100>=procent||(float)T/(float)pams.size()*100>=procent||(float)G/(float)pams.size()*100>=procent||(float)C/(float)pams.size()*100>=procent) {
+				if((float)A/(float)pams.size()*100>=procent||(float)T/(float)pams.size()*100>=procent||
+						(float)G/(float)pams.size()*100>=procent||(float)C/(float)pams.size()*100>=procent) {
 					System.out.println(A+"  "+T+"  "+G+"  "+C+"  "+pams.size()+"  ");
 					size_found=true;
 				}
@@ -88,7 +89,8 @@ public class PAM_finder {
 				
 			}
 			
-			if((float)A/(float)pams1.size()*100>=procent||(float)T/(float)pams1.size()*100>=procent||(float)G/(float)pams1.size()*100>=procent||(float)C/(float)pams1.size()*100>=procent) {
+			if((float)A/(float)pams1.size()*100>=procent||(float)T/(float)pams1.size()*100>=procent||
+					(float)G/(float)pams1.size()*100>=procent||(float)C/(float)pams1.size()*100>=procent) {
 				System.out.println(A+"  "+T+"  "+G+"  "+C+"  "+pams1.size()+"  ");
 				size_found=true;
 			}

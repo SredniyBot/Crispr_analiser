@@ -42,7 +42,8 @@ class FindProtein {
             }else {
                 while(s.contains("QUERY=")) {
                     s=s.substring(s.indexOf("QUERY=")+6);
-                    String f=output("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id="+s.substring(0,s.indexOf("&"))+"&rettype=fasta&retmode=text");
+                    String f=output("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id="
+                            +s.substring(0,s.indexOf("&"))+"&rettype=fasta&retmode=text");
                     f=f.substring(f.indexOf("\n")).replaceAll("\n", "");
                     cas.put(f,s.substring(0,s.indexOf("&")) );
                     try {
